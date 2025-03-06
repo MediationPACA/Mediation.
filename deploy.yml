@@ -1,0 +1,24 @@
+name: Déploiement du Site Web
+
+on:
+  push:
+    branches:
+      - main  # Déclenche le workflow lors d'un push sur la branche 'main'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Récupérer le code source
+        uses: actions/checkout@v3
+
+      - name: Remplacer la clé API dans google-maps-loader.js
+        run: |
+          API_KEY="${{ secrets.YOUR_API_KEY }}"
+          printf '%s\n' "s/YOUR_API_KEY/$API_KEY/g" | sed -i -f - google-maps-loader.js
+
+      - name: Déployer le site web
+        uses: actions/deploy-pages@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}

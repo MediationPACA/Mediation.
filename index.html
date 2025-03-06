@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Google Maps from Sheets (CSV)</title>
+    <script src="google-maps-loader.js"></script> <!-- Charge la clé API dynamiquement -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <style>
+        #map { height: 800px; width: 100%; }
+        #error-message { color: red; }
+        #debug-info { margin-top: 10px; white-space: pre-wrap; }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <div id="error-message"></div>
+    <div id="debug-info"></div>
+
+    <script>
+        let map;
+        let markers = [];
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 8,
+                center: {lat: 43.603354, lng: 6.588334},
+                mapId: 'DEMO_MAP_ID'
+            });
+
+            updateData();
+            setInterval(updateData, 10000);
+        }
+
+        async function updateData() {
+            const geocoder = new google.maps.Geocoder();
+            let debugInfo = "";
+
+            try {
+                const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vSgn7Ua3wOiYoVnr2Tl-dSiBucRC_w0mUEJdMmdmeySAEiEBkBGyLmjuXcCSkR_AYzt_r92du7FfWHk/pub?gid=527237974&single=true&output=csv');
+                const csv = await response.text();
+                
+                Papa.parse(csv, {
+                    complete: async function(results) {
+                        console.log("Parsed CSV:", results.data);
+                        debugInfo += `Nombre total de lignes: ${results.data.length}\n`;
+
+                        for (let i = 1; i < results.data.length; i++) {
+                            const row = results.data[i];
+                            if (row.length >= 14) {
+                                const name = row[0].trim();
+                                const address = row[12].trim() || row[3].trim(); // Utilise l'adresse si dispo, sinon la ville
+
+                                try {
+                                    const location = await geocodeWithCache(geocoder, address);
+                                    const marker = new google.maps.Marker({
+                                        position: location,
+                                        map: map,
+                                        title: name
+                                    });
+
+                                    markers.push(marker);
+                                } catch (geocodeStatus) {
+                                    debugInfo += `Erreur de géocodage pour ${address}: ${geocodeStatus}\n`;
+                                }
+                            }
+                        }
+
+                        document.getElementById('debug-info').textContent = debugInfo;
+                    }
+                });
+
+            } catch (error) {
+                console.error('Erreur:', error);
+                document.getElementById('error-message').textContent = "Erreur lors de la récupération des données.";
+            }
+        }
+
+        async function geocodeWithCache(geocoder, address) {
+            let cache = JSON.parse(localStorage.getItem('geocodingCache') || '{}');
+            if (cache[address]) return cache[address];
+
+            return new Promise((resolve, reject) => {
+                geocoder.geocode({ 'address': address }, (results, status) => {
+                    if (status === 'OK') {
+                        const location = results[0].geometry.location;
+                        cache[address] = { lat: location.lat(), lng: location.lng() };
+                        localStorage.setItem('geocodingCache', JSON.stringify(cache));
+                        resolve(cache[address]);
+                    } else {
+                        reject(status);
+                    }
+                });
+            });
+        }
+
+        window.onload = initMap;
+    </script>
+</body>
+</html>
