@@ -15,7 +15,7 @@ jobs:
 
       - name: Debug Secrets
         run: |
-          echo "🔍 Vérification des secrets GitHub..."
+          echo "Le secret YOUR_API_KEY est-il disponible ?"
           if [ -z "${{ secrets.YOUR_API_KEY }}" ]; then
             echo "❌ ERREUR : Le secret YOUR_API_KEY n'est pas accessible !"
             exit 1
@@ -25,8 +25,7 @@ jobs:
 
       - name: Remplacer la clé API dans google-maps-loader.js
         run: |
-          set -e  # Arrête l'exécution en cas d'erreur
-          API_KEY=$(echo "${{ secrets.YOUR_API_KEY }}" | sed 's/[\/&]/\\&/g')
+          API_KEY="${{ secrets.YOUR_API_KEY }}"
           sed -i "s/YOUR_API_KEY/${API_KEY}/g" google-maps-loader.js
 
       - name: Déployer le site web
