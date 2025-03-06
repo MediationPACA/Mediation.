@@ -1,5 +1,7 @@
 const apiKey = "YOUR_API_KEY";  // Ceci sera remplacé par GitHub Actions
 
+console.log("Clé API utilisée:", apiKey);  // Vérification de la clé API
+
 const script = document.createElement("script");
 script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap`;
 script.async = true;

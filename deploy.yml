@@ -29,6 +29,10 @@ jobs:
           echo "Remplacement de la clé API par ${API_KEY}"  # Vérification du remplacement
           sed -i "s/YOUR_API_KEY/${API_KEY}/g" google-maps-loader.js
 
+      - name: Vérifier le fichier modifié
+        run: |
+          cat google-maps-loader.js  # Affichez le contenu du fichier pour vérifier le remplacement
+
       - name: Déployer le site web
         uses: actions/deploy-pages@v2
         with:
