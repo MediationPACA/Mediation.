@@ -26,6 +26,7 @@ jobs:
       - name: Remplacer la clé API dans google-maps-loader.js
         run: |
           API_KEY="${{ secrets.YOUR_API_KEY }}"
+          echo "Remplacement de la clé API par ${API_KEY}"  # Vérification du remplacement
           sed -i "s/YOUR_API_KEY/${API_KEY}/g" google-maps-loader.js
 
       - name: Déployer le site web

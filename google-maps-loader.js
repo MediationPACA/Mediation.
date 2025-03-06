@@ -7,6 +7,7 @@ script.defer = true;
 document.head.appendChild(script);
 
 function initMap() {
+  console.log("API Google Maps chargée avec succès.");  // Vérification du chargement de l'API
   // Initialisation de la carte ici
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 8,
