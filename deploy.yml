@@ -13,10 +13,23 @@ jobs:
       - name: Récupérer le code source
         uses: actions/checkout@v3
 
-      - name: Remplacer la clé API dans google-maps-loader.js
-        run: |
-          API_KEY="${{ secrets.YOUR_API_KEY }}"
-          printf '%s\n' "s/YOUR_API_KEY/$API_KEY/g" | sed -i -f - google-maps-loader.js
+      - - name: Remplacer la clé API dans google-maps-loader.js
+          run: |
+    API_KEY=$(echo "${{ secrets.YOUR_API_KEY }}" | sed 's/[\/&]/\\&/g')
+    sed -i "s/YOUR_API_KEY/${API_KEY}/g" google-maps-loader.js
+
+    - name: Debug Secrets
+  run: |
+    echo "Le secret YOUR_API_KEY est-il disponible ?"
+    if [ -z "${{ secrets.YOUR_API_KEY }}" ]; then
+      echo "❌ ERREUR : Le secret YOUR_API_KEY n'est pas accessible !"
+      exit 1
+    else
+      echo "✅ SUCCÈS : Le secret YOUR_API_KEY est accessible !"
+    fi
+
+
+
 
       - name: Déployer le site web
         uses: actions/deploy-pages@v2
