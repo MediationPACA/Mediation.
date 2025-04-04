@@ -1,0 +1,27 @@
+(function() {
+    function checkPassword(input) {
+        var encodedPassword = "bW9ubW90ZGVwYXNzZQ=="; 
+        return btoa(input) === encodedPassword;
+    }
+
+    window.verifier = function() {
+        var mdp = document.getElementById("password").value;
+        if (checkPassword(mdp)) {
+            localStorage.setItem("auth", "true"); // Stocke l'authentification
+            window.location.href = "index.html"; // Redirige vers la page protégée
+        } else {
+            alert("Mot de passe incorrect !");
+        }
+    };
+
+    window.checkAccess = function() {
+        if (localStorage.getItem("auth") !== "true") {
+            window.location.href = "login.html"; // Redirige vers la connexion
+        }
+    };
+
+    window.deconnexion = function() {
+        localStorage.removeItem("auth"); // Supprime l'accès
+        window.location.href = "login.html";
+    };
+})();
