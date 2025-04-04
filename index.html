@@ -1,14 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head> <meta charset="UTF-8">
-  <title>Page protégée</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="auth.js"></script>
-  <script>checkAccess();</script> <!-- Vérifie l'accès dès le chargement -->
-</head>
+  <script>
+    try {
+      checkAccess();
+    } catch (error) {
+      console.error("Erreur lors de la vérification d'accès :", error);
+    }
+  </script>
   <title>Google Maps from Sheets (CSV)</title>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfGs1gnWhKjQvgeebgoMtptzwjMwBKwh0&libraries=places,marker&callback=initMap" async defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
   <style>
+    * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: white;
+        }
+        .header {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            background: url('marty.png') no-repeat center;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: black;
+            padding: 20px;
+        }
+        .header h1 {
+            font-size: 50px;
+            font-weight: bold;
+        }
+        .header p {
+            font-size: 18px;
+            max-width: 600px;
+            margin-top: 10px;
+        }
+        .phone {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
     #map { height: 410px; width: 100%; }
     #error-message { color: red; }
     #debug-info { margin-top: 10px; white-space: pre-wrap; font-family: Arial, sans-serif; }
@@ -44,6 +86,19 @@
   </style>
 </head>
 <body>
+  <div class="header">
+    <h1>Urgence 2025</h1>
+    <p>
+        Malgré la neige, et le vent … et la pluie, Malgré les rafales et les intempéries,<br>
+        Et la grêle, et les tourbillons, Par-dessus les plaines et les monts,<br>
+        Défiant les tornades et les éclairs, Alizé, aquilon et tonnerre,<br>
+        Le rapatrieur dévoué vole livrer à chacun son bébé,<br>
+        Rien ne saurait l’arrêter !<br><br>
+        <strong>DUMBO</strong>
+    </p>
+    <p class="phone">0483650279</p>
+</div>
+
   <div id="map"></div>
   <!-- Barre de recherche -->
   <div id="search-container">
@@ -70,6 +125,7 @@
 <iframe src="https://docs.google.com/spreadsheets/d/1SjBmjncMrk6WSFh-0KUzp8Rr55EZqYpcsL2PetWwskU/edit" 
         width="600" height="800"></iframe>
 
+        <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1-tf56PIvRYV-y_Zvg2n36OfwC4Sv-MY&femb=1&ll=43.4647048189242%2C6.29414399999999&z=9" width="800" height="800"></iframe>
 
         <iframe src="https://drive.google.com/file/d/1O53vgIu8fT0flb4bh12cCP7a_gxP2fxq/preview" 
                   width="800" height="800"></iframe>
