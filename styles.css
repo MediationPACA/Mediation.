@@ -84,3 +84,7 @@ button:hover {
         width: 100%;
     }
 }
+#map {
+    position: relative;
+    z-index: 1000;
+  }
