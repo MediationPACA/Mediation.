@@ -1,5 +1,6 @@
 (function() {
     function checkPassword(input) {
+        // Mot de passe encodé en base64 (pour l'exemple)
         var encodedPassword = "bW9ubW90ZGVwYXNzZQ=="; 
         return btoa(input) === encodedPassword;
     }
