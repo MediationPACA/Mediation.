@@ -12,113 +12,122 @@ body {
     to { opacity: 1; }
 }
 .logo {
-    width: 100px;
-    margin-bottom: 20px;
+    width: 8rem; /* Utilisation d'unités relatives */
+    margin-bottom: 1.25rem;
 }
 
 .container {
     background-color: white;
-    padding: 30px 40px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    padding: 1.875rem 2.5rem;
+    border-radius: 0.9375rem;
+    box-shadow: 0 0.625rem 1.875rem rgba(0, 0, 0, 0.2);
     text-align: center;
     animation: fadeIn 1s ease-in;
 
 }
 
 h2 {
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
     color: #333;
 }
 
+
 input[type="password"] {
     width: 100%;
-    padding: 12px;
-    margin-bottom: 20px;
+    padding: 0.75rem; /* 12px en rem */
+    margin-bottom: 1.25rem; /* 20px en rem */
     border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 16px;
+    border-radius: 0.5rem; /* 8px en rem */
+    font-size: 1rem; /* 16px en rem */
 }
 
 button {
     background-color: #7fa77b;
     color: white;
-    padding: 12px 24px;
+    padding: 0.75rem 1.5rem; /* 12px et 24px en rem */
     border: none;
-    border-radius: 8px;
-    font-size: 16px;
+    border-radius: 0.5rem; /* 8px en rem */
+    font-size: 1rem; /* 16px en rem */
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-button:hover {
+button:hover,
+button:focus { /* Ajout de l'état focus */
     background-color: #98b2ce;
+    outline: none; /* Supprime le contour par défaut */
 }
 
 .link a {
     display: inline-block;
-    margin-top: 15px;
+    margin-top: 1rem; /* 15px en rem */
     color: #007bff;
     text-decoration: none;
-    font-size: 20px;
-}
-.text b {
-    display: inline-block;
-    margin-top: 15px;
-    color: #000000;
-    text-decoration: underline;
-    font-size: 20px;
+    font-size: 1.25rem; /* 20px en rem */
 }
 
-.link a:hover {
-    text-decoration: unset;
+.text b {
+    display: inline-block;
+    margin-top: 1rem; /* 15px en rem */
+    color: #000000;
+    text-decoration: underline;
+    font-size: 1.25rem; /* 20px en rem */
 }
+
+.link a:hover,
+.link a:focus { /* Ajout de l'état focus */
+    text-decoration: underline;
+}
+
 @media (max-width: 600px) {
     .container {
         width: 90%;
-        padding: 20px;
+        padding: 1.25rem; /* 20px en rem */
     }
 
     .logo {
-        width: 80px;
+        width: 5rem; /* 80px en rem */
     }
 
     h2 {
-        font-size: 20px;
+        font-size: 1.25rem; /* 20px en rem */
     }
 
     button {
         width: 100%;
     }
 }
+
 #map {
     position: relative;
     z-index: 1000;
-  }
-  #debug-container {
-    margin-top: 10px;
+}
+
+#debug-container {
+    margin-top: 0.625rem; /* 10px en rem */
     text-align: left;
-    padding: 10px;
+    padding: 0.625rem; /* 10px en rem */
     border: 1px solid #ccc;
     font-family: Arial, sans-serif;
-  }
-  
-  #toggle-debug {
+}
+
+#toggle-debug {
     background: none;
     border: none;
-    font-size: 16px;
+    font-size: 1rem; /* 16px en rem */
     font-weight: bold;
     cursor: pointer;
     display: flex;
     align-items: center;
-    margin-bottom: 5px;
-  }
-  
-  #arrow {
+    margin-bottom: 0.3125rem; /* 5px en rem */
+}
+
+#arrow {
     display: inline-block;
     transition: transform 0.3s ease;
-    margin-right: 8px;
-  }
+    margin-right: 0.5rem; 
+} 
+
   
   #toggle-debug.open #arrow {
     transform: rotate(90deg);
