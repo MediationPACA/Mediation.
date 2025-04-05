@@ -64,7 +64,12 @@
       <ul id="legend-list"></ul>
     </div>
     <div id="error-message"></div>
-    <div id="debug-info"></div>
+    <div id="debug-container">
+      <button id="toggle-debug">
+        <span id="arrow">▶</span> Afficher liste infos 
+      </button>
+      <div id="debug-info" style="display: none;"></div>
+    
   </div>
 
   <!-- Iframes divers -->
@@ -474,6 +479,24 @@
       const b = (hash * 1111) % 256;
       return `rgb(${r},${g},${b})`;
     }
+    document.getElementById("toggle-debug").addEventListener("click", function () {
+  const debugInfo = document.getElementById("debug-info");
+  const arrow = document.getElementById("arrow");
+  const button = document.getElementById("toggle-debug");
+
+  if (debugInfo.style.display === "none") {
+    debugInfo.style.display = "block";
+    arrow.style.transform = "rotate(90deg)";
+    button.classList.add("open");
+    button.innerHTML = '<span id="arrow" style="transform: rotate(90deg);">▶</span> Masquer les infos de debug';
+  } else {
+    debugInfo.style.display = "none";
+    arrow.style.transform = "rotate(0deg)";
+    button.classList.remove("open");
+    button.innerHTML = '<span id="arrow">▶</span> Afficher les infos de debug';
+  }
+});
+
   </script>
 
   <!-- Chargement asynchrone de l'API Google Maps, avec callback vers initMap -->
