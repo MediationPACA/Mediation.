@@ -9,6 +9,11 @@
     } catch (error) {
       console.error("Erreur lors de la vérification d'accès :", error);
     }
+    function initMap() {
+      map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 8.8,
+        center: {lat: 43.453354, lng: 6.288334}
+      });}
   </script>
   <link rel="icon" type="image/png" href="TOTEM1.png">
   <title>Urgence 2025</title>
