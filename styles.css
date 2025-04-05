@@ -60,11 +60,18 @@ button:hover {
     margin-top: 15px;
     color: #007bff;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 20px;
+}
+.text b {
+    display: inline-block;
+    margin-top: 15px;
+    color: #000000;
+    text-decoration: underline;
+    font-size: 20px;
 }
 
 .link a:hover {
-    text-decoration: underline;
+    text-decoration: unset;
 }
 @media (max-width: 600px) {
     .container {
