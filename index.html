@@ -33,6 +33,10 @@
     #search-container { margin: 10px 0; font-family: Arial, sans-serif; }
     #search-input { padding: 5px; width: 250px; font-size: 14px; }
     #search-button { padding: 5px 10px; font-size: 14px; }
+    #switchMapButton { padding: 5px 10px; font-size: 14px; }
+    #switchMapButton2 { padding: 5px 10px; font-size: 14px; }
+    #switchMapButtonUrgence { padding: 5px 10px; font-size: 14px; }
+    #toggle-debug { padding: 5px 10px; font-size: 14px; }
     .highlight { background-color: yellow; }
     .navbar {
             display: flex;
@@ -54,7 +58,7 @@
         }
   </style>
 </head>
-<body>
+<body onload="checkAccess()">
   <div class="header">
     <h1>Urgence 2025</h1>
     <p>
