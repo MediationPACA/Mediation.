@@ -6,7 +6,21 @@
   <link rel="icon" type="image/png" href="TOTEM1.png">
   <title>Urgence 2025</title>
   <!-- Authentification -->
+  <style>
+    body.noscroll {
+        overflow: hidden; /* Désactive le défilement */
+    }
+</style>
   <script src="auth.js"></script>
+  <script>
+    window.onbeforeunload = function() {
+        return undefined; // Évite le pop-up de confirmation
+    };
+
+    window.onload = function() {
+        window.scrollTo(0, 0); // Reste en haut de la page
+    };
+</script>
   <script>
     try {
       checkAccess();
@@ -14,6 +28,7 @@
       console.error("Erreur lors de la vérification d'accès :", error);
     }
   </script>
+  
   <!-- Inclusion des bibliothèques -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
   <style>
@@ -36,6 +51,8 @@
     #switchMapButton { padding: 5px 10px; font-size: 14px; }
     #switchMapButton2 { padding: 5px 10px; font-size: 14px; }
     #switchMapButtonUrgence { padding: 5px 10px; font-size: 14px; }
+    #manualSearchButton { padding: 5px 10px; font-size: 14px; }
+    #manualSearchInput { padding: 5px 20px; font-size: 14px; }
     #toggle-debug { padding: 5px 10px; font-size: 14px; }
     .highlight { background-color: yellow; }
     .navbar {
@@ -81,6 +98,9 @@
     <button id="switchMapButton2">Afficher/Enlever la carte Relai</button>
     <input type="text" id="search-input" placeholder="Rechercher un marqueur" />
     <button id="search-button">Rechercher</button>
+    <input type="text" id="manualSearchInput" placeholder="Rechercher une ville ou une adresse">
+<button id="manualSearchButton">Rechercher</button>
+
     <button id="switchMapButtonUrgence">Carte Urgence (Ajouter/Enlever tous les bénévoles)</button>
     <div id="legend">
       </br> <strong>Légende :</strong>
@@ -279,6 +299,8 @@
       currentCSV = csvURL2;
       updateData(currentCSV);
     }
+   
+
 
     // Gestion des événements une fois le DOM chargé
     document.addEventListener("DOMContentLoaded", function() {
@@ -286,8 +308,15 @@
       document.getElementById("switchMapButton2").addEventListener("click", switchMapToCSV3);
       document.getElementById("switchMapButtonUrgence").addEventListener("click", switchMapUrgence);
       document.getElementById("search-button").addEventListener("click", searchMarkers);
+      document.getElementById("manualSearchButton").addEventListener("click", manualSearch);
+      document.getElementById("manualSearchinput").addEventListener("keydown", handleKeyPress);
+    
     });
-
+         function handleKeyPress(event) {
+            if (event.key === "Enter") { // Vérifie si la touche pressée est "Entrée"
+                verifier(); // Appelle la fonction de vérification
+            }
+        }
     // Fonction d'initialisation de la carte
     function initMap() {
       map = new google.maps.Map(document.getElementById('map'), {
@@ -493,6 +522,48 @@
         debugLine.classList.add("highlight");
       }
     }
+// Rechercher manuellement une ville/adresse saisie par l'utilisateur
+async function manualSearch() {
+  const input = document.getElementById("manualSearchInput");
+  const query = input.value.trim();
+
+  if (!query) return alert("Veuillez saisir une ville ou une adresse");
+
+  const geocoder = new google.maps.Geocoder();
+
+  try {
+    const location = await geocodeWithCache(geocoder, query);
+    const latLng = new google.maps.LatLng(location.lat, location.lng);
+
+    // Centre la carte
+    map.setCenter(latLng);
+    map.setZoom(12);
+
+    // Ajoute un marqueur temporaire
+    const marker = new google.maps.Marker({
+      position: latLng,
+      map: map,
+      title: query,
+      icon: {
+        path: google.maps.SymbolPath.CIRCLE,
+        fillColor: '#FF0000',
+        fillOpacity: 0.8,
+        strokeColor: '#000',
+        strokeWeight: 2,
+        scale: 10
+      }
+    });
+
+    // Popup
+    const infoWindow = new google.maps.InfoWindow({
+      content: `<b>${query}</b>`
+    });
+    marker.addListener("click", () => infoWindow.open(map, marker));
+    infoWindow.open(map, marker);
+  } catch (err) {
+    alert("Adresse introuvable : " + err);
+  }
+}
 
     // Fonction utilitaire pour générer une couleur à partir d'un numéro
     function getColorFromNumero(numero) {
