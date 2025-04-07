@@ -111,8 +111,8 @@
   </div>
 
   <!-- Iframes divers -->
-  <iframe src="https://docs.google.com/spreadsheets/d/1V6Ez2yqOxEJ2GFLIdwPw-vI9FuinN7sk/edit" width="600" height="800"></iframe>
-  <iframe src="https://docs.google.com/spreadsheets/d/1WJ5bBVULuvcCbTtekb4jAbY58cHOA0YmbLiuPDiQZ64/edit?=&gid=720675371#gid=720675371" width="800" height="800"></iframe>
+    <iframe src="https://docs.google.com/spreadsheets/d/1WJ5bBVULuvcCbTtekb4jAbY58cHOA0YmbLiuPDiQZ64/edit?=&gid=720675371#gid=720675371" width="800" height="800"></iframe>
+<iframe src="https://docs.google.com/spreadsheets/d/1V6Ez2yqOxEJ2GFLIdwPw-vI9FuinN7sk/edit" width="600" height="800"></iframe>
 
   <!-- Votre code JavaScript principal -->
   <script>
@@ -145,6 +145,8 @@
     function createamphiSVG(color) { return `data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><text x="5" y="30" font-size="30" fill="${color}">🐸</text></svg>`; }
     function createaccSVG(color) { return `data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><text x="5" y="30" font-size="20" fill="${color}">✅</text></svg>`; }
     function createrefSVG(color) { return `data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><text x="5" y="30" font-size="20" fill="${color}">❌</text></svg>`; }
+    function createphSVG(color) { return `data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><text x="5" y="30" font-size="20" fill="${color}">☎️</text></svg>`; }
+
     
     function createTriangleSVG(color) { return `data:image/svg+xml;charset=UTF-8,<svg width="20" height="20" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,5 25,25 5,25" fill="${color}" stroke="black" stroke-width="2" /></svg>`; }
 
@@ -179,7 +181,7 @@
           Numero: row[2]?.trim() || '',
           cityName: row[0]?.trim() || '',
           espece: row[4]?.trim() || '',
-          address: (row[12]?.trim() ? row[12].trim() : row[0]?.trim()) || '',
+          address: (row[0]?.trim() ? row[0].trim() : row[0]?.trim()) || '',
           status: row[13]?.trim() || '',
           seil: row[0]?.trim() || '',
           Esp: row[4]?.trim() || '',
@@ -229,7 +231,7 @@
           <span style="font-size:20px;">📞</span> : Contact en cours
           <span style="font-size:20px;">✅</span> : Acceptent
         <span style="font-size:20px;">❌</span> : Refusent 
-          <span style="font-size:20px;">▲</span> : À contacter
+          <span style="font-size:20px;">☎️</span> : À contacter
         
           <span style="font-size:20px;">▲</span> : Autre
         `;
@@ -374,11 +376,15 @@
                   if (csvUrl === csvURL1) {
                     markerColor = getColorFromNumero(Numero);
                     const lowerEsp = Esp.toLowerCase();
-                    if(lowerEsp.includes("Contact en cours")) {
-                      icon = { url: createPhoneSVG(markerColor) };
                     
-                    } else if(lowerEsp.includes("acceptent")) {
+                    if(lowerEsp.includes("acceptent")) {
                       icon = { url: createaccSVG(markerColor) };
+                    } else if(lowerEsp.includes("en cours")) {
+                      icon = { url: createPhoneSVG(markerColor) };
+                    } else if(lowerEsp.includes("refusent")) {
+                        icon = { url: createrefSVG(markerColor) };
+                    } else if(lowerEsp.includes("à contacter")) {
+                        icon = { url: createphSVG(markerColor) };
                     } else {
                       icon = { url: createTriangleSVG(markerColor) };
                     }
