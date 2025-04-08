@@ -75,7 +75,8 @@
         }
   </style>
 </head>
-<body onload="checkAccess()">
+<body class="protected" onload="checkAccess()">
+
   <div class="header">
     <h1>Urgence 2025</h1>
     <p>
@@ -92,7 +93,9 @@
   <div> <button class= "subpage" onclick="window.location.href='sub1.html'"> Gestion Diffusion </button></div>
 
   <div id="map"></div>
-
+  <body class="protected">
+    <script src="auth.js"></script>
+  
   <!-- Barre de recherche et légende -->
   <div id="search-container">
     <button id="switchMapButton">Afficher/Enlever la carte bénévoles</button>
@@ -118,7 +121,7 @@
 
   <!-- Iframes divers -->
   <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdYmy3eCjHTysUDNlxZLb3flDGO8rR5OBlYthfuRYx3zOSZNA/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Chargement…</iframe>
-  <p class="link"><a href="https://docs.google.com/spreadsheets/d/1WJ5bBVULuvcCbTtekb4jAbY58cHOA0YmbLiuPDiQZ64/edit?resourcekey=&gid=527237974#gid=527237974" target="_blank">Formulaire médiation</a></p>
+  <p class="link"><a href="https://docs.google.com/spreadsheets/d/1WJ5bBVULuvcCbTtekb4jAbY58cHOA0YmbLiuPDiQZ64/edit?resourcekey=&gid=527237974#gid=527237974" target="_blank">Médiation</a></p>
 
   
   <iframe src="https://docs.google.com/spreadsheets/d/1WJ5bBVULuvcCbTtekb4jAbY58cHOA0YmbLiuPDiQZ64/edit" width="600" height="800"></iframe>
@@ -142,6 +145,7 @@
     let currentSearchIndex = 0;
     let lastSearchTerm = "";
     let urgentMode = false;
+    
 
     const csvURL1 = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSgn7Ua3wOiYoVnr2Tl-dSiBucRC_w0mUEJdMmdmeySAEiEBkBGyLmjuXcCSkR_AYzt_r92du7FfWHk/pub?gid=527237974&single=true&output=csv';
     const csvURL2 = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSsfjj7eltK_SoO5hXkwQeZIp-Cufzc1DrcMUOyhrRnvgPi6w4cJB3fVCptVpiQG7RwB6EmsnqhZhQF/pub?gid=0&single=true&output=csv';
