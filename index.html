@@ -11,7 +11,7 @@
         overflow: hidden; /* Désactive le défilement */
     }
 </style>
-  
+  <script src="auth.js"></script>
   <script>
     window.onbeforeunload = function() {
         return undefined; // Évite le pop-up de confirmation
@@ -75,8 +75,7 @@
         }
   </style>
 </head>
-<body class="protected" onload="checkAccess()">
-
+<body onload="checkAccess()">
   <div class="header">
     <h1>Urgence 2025</h1>
     <p>
@@ -93,9 +92,7 @@
   <div> <button class= "subpage" onclick="window.location.href='sub1.html'"> Gestion Diffusion </button></div>
 
   <div id="map"></div>
-  
-    <script src="auth.js"></script>
-  
+
   <!-- Barre de recherche et légende -->
   <div id="search-container">
     <button id="switchMapButton">Afficher/Enlever la carte bénévoles</button>
@@ -607,6 +604,5 @@ async function manualSearch() {
 
   <!-- Chargement asynchrone de l'API Google Maps, avec callback vers initMap -->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfGs1gnWhKjQvgeebgoMtptzwjMwBKwh0&libraries=places,marker&callback=initMap" async defer></script>
-  <script src="auth.js"></script>
 </body>
 </html>
