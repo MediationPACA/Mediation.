@@ -73,6 +73,19 @@
         .logout-button:hover {
             background-color: #c82333; /* Couleur plus foncée au survol */
         }
+        .link1 {
+  display: inline-block;
+  padding: 3px 10px;
+  background-color: #e6e6e6;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: none;
+}
+.link:hover {
+  background-color: #7fa77b;
+}
+
   </style>
 </head>
 <body onload="checkAccess()">
@@ -90,7 +103,8 @@
     <button class="logout-button" onclick="deconnexion()">Déconnexion</button>
   </div>
   <div> <button class= "subpage" onclick="window.location.href='sub1.html'"> Gestion Diffusion </button>
-    <button class= "sites" onclick="window.location.href='sites.html'"> Sites Utiles </button></div>
+    <button class= "sites" onclick="window.location.href='sites.html'"> Sites Utiles </button>
+    
 
   <div id="map"></div>
 
@@ -104,6 +118,7 @@
 <button id="manualSearchButton">Rechercher</button>
 
     <button id="switchMapButtonUrgence">Carte Urgence (Ajouter/Enlever tous les bénévoles)</button>
+    <a class="link1" href="https://www.ornitho.com/" target="_blank">Identification oiseau IA</a>
     <div id="legend">
       </br> <strong>Légende :</strong>
       <ul id="legend-list"></ul>
