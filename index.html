@@ -82,6 +82,9 @@
   border-radius: 5px;
   font-weight: none;
 }
+.link1:hover {
+  background-color: #7fa77b;
+}
 .link:hover {
   background-color: #7fa77b;
 }
@@ -118,7 +121,8 @@
 <button id="manualSearchButton">Rechercher</button>
 
     <button id="switchMapButtonUrgence">Carte Urgence (Ajouter/Enlever tous les bénévoles)</button>
-    <a class="link1" href="https://www.ornitho.com/" target="_blank">Identification oiseau IA</a>
+  </br><a class="link1" href="https://www.ornitho.com/" target="_blank">Identification oiseau IA</a>
+    <a class="link1" href="https://www.oiseaux.net/identifier/accueil.html" target="_blank">Aide identification</a>
     <div id="legend">
       </br> <strong>Légende :</strong>
       <ul id="legend-list"></ul>
@@ -327,21 +331,31 @@
    
 
 
-    // Gestion des événements une fois le DOM chargé
-    document.addEventListener("DOMContentLoaded", function() {
-      document.getElementById("switchMapButton").addEventListener("click", switchMap);
-      document.getElementById("switchMapButton2").addEventListener("click", switchMapToCSV3);
-      document.getElementById("switchMapButtonUrgence").addEventListener("click", switchMapUrgence);
-      document.getElementById("search-button").addEventListener("click", searchMarkers);
-      document.getElementById("manualSearchButton").addEventListener("click", manualSearch);
-      document.getElementById("manualSearchinput").addEventListener("keydown", handleKeyPress);
     
+  // Attendre que le DOM soit chargé une seule fois
+  document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("switchMapButton").addEventListener("click", switchMap);
+    document.getElementById("switchMapButton2").addEventListener("click", switchMapToCSV3);
+    document.getElementById("switchMapButtonUrgence").addEventListener("click", switchMapUrgence);
+    document.getElementById("search-button").addEventListener("click", searchMarkers);
+    document.getElementById("manualSearchButton").addEventListener("click", manualSearch);
+
+    // ✅ L'écouteur pour la touche "Entrée"
+    const input = document.getElementById("manualSearchInput");
+    input.addEventListener("keydown", function(e) {
+      if (e.key === "Enter") {
+        manualSearch();
+      }
     });
-         function handleKeyPress(event) {
-            if (event.key === "Enter") { // Vérifie si la touche pressée est "Entrée"
-                verifier(); // Appelle la fonction de vérification
-            }
-        }
+  });
+  const input = document.getElementById("search-input");
+    input.addEventListener("keydown", function(e) {
+      if (e.key === "Enter") {
+        searchMarkers();
+      }
+    });
+
+
     // Fonction d'initialisation de la carte
     function initMap() {
       map = new google.maps.Map(document.getElementById('map'), {
