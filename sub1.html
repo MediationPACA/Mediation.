@@ -25,7 +25,7 @@
     #search-container { margin: 10px 0; font-family: Arial, sans-serif; }
     #search-input { padding: 5px; width: 250px; font-size: 14px; }
     #search-button { padding: 5px 10px; font-size: 14px; }
-    #switchMapButton, #switchMapButton2, #switchMapButtonUrgence, #manualSearchButton, #toggle-debug {
+    #switchMapButton, #switchMapButton2, #manualSearchButton, #toggle-debug {
       padding: 5px 10px; font-size: 14px;
     }
     #manualSearchInput { padding: 5px 20px; font-size: 14px; }
@@ -126,7 +126,7 @@
     let searchResults = [];
     let currentSearchIndex = 0;
     let lastSearchTerm = "";
-    let urgentMode = false;
+   
 
     const csvURL1 = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSgn7Ua3wOiYoVnr2Tl-dSiBucRC_w0mUEJdMmdmeySAEiEBkBGyLmjuXcCSkR_AYzt_r92du7FfWHk/pub?gid=720675371&single=true&output=csv';
     const csvURL2 = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTwt2lwCfa9Tc3gA68tNu4ODy4Dki1xfU13HHqeD-0S7WT755Xu4BxeBRgPgJaadw/pub?output=csv';
@@ -283,19 +283,11 @@
       currentCSV = (currentCSV !== csvURL3) ? csvURL3 : csvURL1;
       updateData(currentCSV);
     }
-    function switchMapUrgence() {
-      urgentMode = !urgentMode;
-      markers.forEach(marker => marker.setMap(null));
-      markers = [];
-      currentCSV = csvURL2;
-      updateData(currentCSV);
-    }
-    
+   
     // Gestion des événements une fois le DOM chargé
     document.addEventListener("DOMContentLoaded", function() {
       document.getElementById("switchMapButton").addEventListener("click", switchMap);
       document.getElementById("switchMapButton2").addEventListener("click", switchMapToCSV3);
-      document.getElementById("switchMapButtonUrgence").addEventListener("click", switchMapUrgence);
       document.getElementById("search-button").addEventListener("click", searchMarkers);
       document.getElementById("manualSearchButton").addEventListener("click", manualSearch);
       // Correction de l'ID pour l'écoute de la touche "Enter"
@@ -552,6 +544,6 @@
       }
     });
   </script>
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfGs1gnWhKjQvgeebgoMtptzwjMwBKwh0&libraries=places,marker&callback=initMap" async defer></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfGs1gnWhKjQvgeebgoMtptzwjMwBKwh0&libraries=places,marker&callback=initMap" async defer></script>
 </body>
 </html>
