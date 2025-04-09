@@ -293,14 +293,19 @@
       document.getElementById("search-button").addEventListener("click", searchMarkers);
       document.getElementById("manualSearchButton").addEventListener("click", manualSearch);
       // Correction de l'ID pour l'écoute de la touche "Enter"
-      document.getElementById("manualSearchInput").addEventListener("keydown", handleKeyPress);
-    });
-    
-    function handleKeyPress(event) {
-      if (event.key === "Enter") {
-        verifier();
+      const input = document.getElementById("manualSearchInput");
+    input.addEventListener("keydown", function(e) {
+      if (e.key === "Enter") {
+        manualSearch();
       }
-    }
+    });
+  });
+  const input = document.getElementById("search-input");
+    input.addEventListener("keydown", function(e) {
+      if (e.key === "Enter") {
+        searchMarkers();
+      }
+    });
     
     // Initialisation de la carte
     function initMap() {
