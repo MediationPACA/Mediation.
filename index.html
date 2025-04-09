@@ -504,6 +504,7 @@
                     marker.addListener("click", () => {
                       infoWindow.setContent(`<div style="font-size:20px; font-weight:bold; color:#333;">${name} (${espece} ${Numero}<br>${jourdispo}<br>${info}<br>${Emoj} ${Emoj2})</div>`);
                       infoWindow.open(map, marker);
+                      
                     });
                     markers.push(marker);
                     let debugLine = "";
