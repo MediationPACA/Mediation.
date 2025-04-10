@@ -183,7 +183,7 @@
     function createserpSVG(color) { return `data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><text x="5" y="30" font-size="30" fill="${color}">🐍</text></svg>`; }
     function createamphiSVG(color) { return `data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><text x="5" y="30" font-size="30" fill="${color}">🐸</text></svg>`; }
     function createTriangleSVG(color) { return `data:image/svg+xml;charset=UTF-8,<svg width="20" height="20" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,5 25,25 5,25" fill="${color}" stroke="black" stroke-width="2" /></svg>`; }
-    function createInterventionSVG(color) {  return `data:image/svg+xml;utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><text x="5" y="30" font-size="30" fill="${color}">🔴</text> </svg>`;
+    function createInterventionSVG(color) {  return `data:image/svg+xml;utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"><text x="1" y="42" font-size="40" fill="${color}">⭕</text> </svg>`;
 }
 
     // Fonction de géocodage avec cache
@@ -267,44 +267,45 @@
       if (csvUrl === csvURL1) {
         legend.style.display = 'inline';
         legendList.innerHTML = `
-          <span style="font-size:20px;">🦆</span> : Oiseaux
-          <span style="font-size:20px;">🦊</span> : Mammifères
-          <span style="font-size:20px;">🦇</span> : Chiroptères
-          <span style="font-size:20px;">🐍</span> : Serpents
-          <span style="font-size:20px;">🐢</span> : Tortues
-          <span style="font-size:20px;">🐶</span> : Domestiques
-          <span style="font-size:20px;">🐸</span> : Amphibiens
-          <span style="font-size:20px;">🦎</span> : Reptiles
-          <span style="font-size:20px;">▲</span> : Autre
+          <span style="font-size:20px;">🦆:</span> Oiseaux
+          <span style="font-size:20px;">🦊:</span> Mammifères
+          <span style="font-size:20px;">🦇:</span> Chiroptères
+          <span style="font-size:20px;">🐍:</span> Serpents
+          <span style="font-size:20px;">🐢:</span> Tortues
+          <span style="font-size:20px;">🐶:</span> Domestiques
+          <span style="font-size:20px;">🐸:</span> Amphibiens
+          <span style="font-size:20px;">🦎:</span> Reptiles
+          <span style="font-size:20px;">🦆+⭕:</span> Intervention
+          <span style="font-size:20px;">▲:</span> Autre
         `;
       } else if (csvUrl === csvURL2) {
         legend.style.display = 'inline';
         legendList.innerHTML = `
-          <span style="font-size:20px;">📞</span> : Médiation
-          <span style="font-size:20px;">🚑</span> : Rapatrieur
-          <span style="font-size:20px;">🩺</span> : Rapatrieur/Médiation/Soigneur
-          <span style="font-size:20px;">▲</span> : Autre
+          <span style="font-size:20px;">📞:</span> : Médiation
+          <span style="font-size:20px;">🚑:</span> : Rapatrieur
+          <span style="font-size:20px;">🩺:</span> : Rapatrieur/Médiation/Soigneur
+          <span style="font-size:20px;">▲:</span> : Autre
         `;
       } else if (csvUrl === csvURL3) {
         legend.style.display = 'inline';
         legendList.innerHTML = `
-          <span style="font-size:20px;">💉</span> : Euthanasie
-          <span style="font-size:20px;">🩺</span> : Diagnostique
-          <span style="font-size:20px;">🍼</span> : Nursing
-          <span style="font-size:20px;">🛠️</span> : Opération
-          <span style="font-size:20px;">📦</span> : Point Relais
-          <span style="font-size:20px;">🩹</span> : Premiers soins
-          <span style="font-size:20px;">🩻</span> : Radiographie
-          </br> <span style="font-size:20px;">🦤</span> : Goéland
-          <span style="font-size:20px;">🦊</span> : Mammifères
-          <span style="font-size:20px;">🦆</span> : Oiseaux
-          <span style="font-size:20px;">🦔</span> : Petits mammifères
-          <span style="font-size:20px;">🕊️</span> : Pigeons Tourterelles
-          <span style="font-size:20px;">🦅</span> : Rapaces
-          <span style="font-size:20px;">🦎</span> : Reptiles
-          <span style="font-size:20px;">🐢</span> : Tortues
-          <span style="font-size:20px;">🦇</span> : Chiroptères
-          <span style="font-size:20px;">🚫🦤</span> : Pas goéland
+          <span style="font-size:20px;">💉:</span> Euthanasie
+          <span style="font-size:20px;">🩺:</span> Diagnostique
+          <span style="font-size:20px;">🍼:</span> Nursing
+          <span style="font-size:20px;">🛠️:</span> Opération
+          <span style="font-size:20px;">📦:</span> Point Relais
+          <span style="font-size:20px;">🩹:</span> Premiers soins
+          <span style="font-size:20px;">🩻:</span> Radiographie
+          </br> <span style="font-size:20px;">🦤:</span> Goéland
+          <span style="font-size:20px;">🦊:</span> Mammifères
+          <span style="font-size:20px;">🦆:</span> Oiseaux
+          <span style="font-size:20px;">🦔:</span> Petits mammifères
+          <span style="font-size:20px;">🕊️:</span> Pigeons Tourterelles
+          <span style="font-size:20px;">🦅:</span> Rapaces
+          <span style="font-size:20px;">🦎:</span> Reptiles
+          <span style="font-size:20px;">🐢:</span> Tortues
+          <span style="font-size:20px;">🦇:</span> Chiroptères
+          <span style="font-size:20px;">🚫🦤:</span> Pas goéland
         `;
       } else {
         legend.style.display = 'none';
@@ -444,7 +445,8 @@
 
                     if (csvUrl === csvURL1) {
                       const lowerEsp = Esp.toLowerCase();
-                      if(lowerEsp.includes("oiseau")) {
+                      const lowerStatus = status.trim().toLowerCase();
+                       if(lowerEsp.includes("oiseau")) {
                         icon = { url: createOisSVG(markerColor) };
                       } else if(lowerEsp.includes("mammifère") || lowerEsp.includes("mammifere")) {
                         icon = { url: createMammSVG(markerColor) };
@@ -498,14 +500,16 @@
                       position: finalPosition,
                       map: map,
                       title: `${name} ${espece} ${Numero} \n${jourdispo}\n${info} ${Emoj} ${Emoj2}`,
-                      icon: icon
+                      icon: icon,
+                      zIndex: 10 
                     });
                     
+          
 if (csvUrl === csvURL1 && status.trim().toLowerCase() === "intervention") {
   console.log("Création du marqueur d'intervention");
   const interventionOffset = {
-    lat: 0.0500,
-    lng: 0.5000
+    lat: 0.0000,
+    lng: 0.0000
   };
   const interventionMarker = new google.maps.Marker({
     position: {
@@ -513,10 +517,8 @@ if (csvUrl === csvURL1 && status.trim().toLowerCase() === "intervention") {
       lng: finalPosition.lng() + interventionOffset.lng
     },
     map: map,
-    icon: {
-      url: createInterventionSVG("#FF0000"),
-      scaledSize: new google.maps.Size(20, 20)
-    }
+    icon: {      url: createInterventionSVG(markerColor)}, 
+    zIndex: 1     
   });
   markers.push(interventionMarker);
 }
