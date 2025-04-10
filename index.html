@@ -88,7 +88,9 @@
 .link:hover {
   background-color: #7fa77b;
 }
-
+.sites {
+  font-weight: bold;
+}
   </style>
 </head>
 <body onload="checkAccess()">
@@ -105,9 +107,10 @@
     <p class="phone">0483650279</p>
     <button class="logout-button" onclick="deconnexion()">Déconnexion</button>
   </div>
-  <div> <button class= "subpage" onclick="window.location.href='sub1.html'"> Gestion Diffusion </button>
+  <div> <button class= "sites" onclick="window.location.href='sub1.html'"> Gestion Diffusion </button>
     <button class= "sites" onclick="window.location.href='sites.html'"> Sites Utiles </button>
-    
+    <button class= "sites" onclick="window.location.href='DOC.html'"> Doc Véto/bénévoles </button>
+
 
   <div id="map"></div>
 
@@ -144,10 +147,8 @@
   <iframe src="https://docs.google.com/spreadsheets/d/1WJ5bBVULuvcCbTtekb4jAbY58cHOA0YmbLiuPDiQZ64/edit" width="600" height="800"></iframe>
   <p class="link"><a href="https://docs.google.com/spreadsheets/d/1PSjpRvCEZI1pqhebKzsGvdVUrOHlzc1d/edit?gid=1056850233#gid=1056850233" target="_blank">Véto83</a></p>
 
-  <iframe src="https://docs.google.com/spreadsheets/d/1PSjpRvCEZI1pqhebKzsGvdVUrOHlzc1d/edit" width="600" height="800"></iframe>
   <p class="link"><a href="https://docs.google.com/spreadsheets/d/1SjBmjncMrk6WSFh-0KUzp8Rr55EZqYpcsL2PetWwskU/edit?gid=0#gid=0" target="_blank">Bénévoles</a></p>
 
-  <iframe src="https://docs.google.com/spreadsheets/d/1SjBmjncMrk6WSFh-0KUzp8Rr55EZqYpcsL2PetWwskU/edit" width="600" height="800"></iframe>
   <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1-tf56PIvRYV-y_Zvg2n36OfwC4Sv-MY&femb=1&ll=43.4647048189242%2C6.29414399999999&z=9" width="800" height="800"></iframe>
   <iframe src="https://drive.google.com/file/d/1O53vgIu8fT0flb4bh12cCP7a_gxP2fxq/preview" width="800" height="800"></iframe>
 
@@ -182,6 +183,8 @@
     function createserpSVG(color) { return `data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><text x="5" y="30" font-size="30" fill="${color}">🐍</text></svg>`; }
     function createamphiSVG(color) { return `data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><text x="5" y="30" font-size="30" fill="${color}">🐸</text></svg>`; }
     function createTriangleSVG(color) { return `data:image/svg+xml;charset=UTF-8,<svg width="20" height="20" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,5 25,25 5,25" fill="${color}" stroke="black" stroke-width="2" /></svg>`; }
+    function createInterventionSVG(color) {  return `data:image/svg+xml;utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><text x="5" y="30" font-size="30" fill="${color}">🔴</text> </svg>`;
+}
 
     // Fonction de géocodage avec cache
     async function geocodeWithCache(geocoder, cityName) {
@@ -411,7 +414,9 @@
                   }
                 }
                 
-                if ((csvUrl === csvURL2 && urgentMode) || status === "En cours" || status === "Disponible") {
+                if ((csvUrl === csvURL2 && urgentMode) || 
+    (csvUrl === csvURL1 && (status === "En cours" || status === "Intervention")) || 
+    status === "Disponible") {
                   let markerColor;
                   let icon;
                   if (csvUrl === csvURL1) {
@@ -495,6 +500,27 @@
                       title: `${name} ${espece} ${Numero} \n${jourdispo}\n${info} ${Emoj} ${Emoj2}`,
                       icon: icon
                     });
+                    
+if (csvUrl === csvURL1 && status.trim().toLowerCase() === "intervention") {
+  console.log("Création du marqueur d'intervention");
+  const interventionOffset = {
+    lat: 0.0500,
+    lng: 0.5000
+  };
+  const interventionMarker = new google.maps.Marker({
+    position: {
+      lat: finalPosition.lat() + interventionOffset.lat,
+      lng: finalPosition.lng() + interventionOffset.lng
+    },
+    map: map,
+    icon: {
+      url: createInterventionSVG("#FF0000"),
+      scaledSize: new google.maps.Size(20, 20)
+    }
+  });
+  markers.push(interventionMarker);
+}
+
                     marker.customData = {
                       cityName: cityName.toLowerCase(),
                       name: name.toLowerCase(),
