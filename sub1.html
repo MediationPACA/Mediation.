@@ -94,7 +94,9 @@
   <!-- Barre de recherche et légende -->
   <div id="search-container">
     <button id="switchMapButton">Afficher/Enlever la carte Diffusion</button>
-    <button id="switchMapButton2">Afficher/Enlever la carte Relai</button>
+    <button id="switchMapButton2">Afficher/Enlever la carte COMCOM</button>
+    <button id="switchMapButton3">Afficher/Enlever la carte Agenda</button>
+
     <input type="text" id="search-input" placeholder="Rechercher un marqueur" />
     <button id="search-button">Rechercher</button>
     <input type="text" id="manualSearchInput" placeholder="Rechercher une ville ou une adresse">
@@ -114,9 +116,9 @@
 
   <!-- Iframes divers -->
   <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSejjieiCq3ZVbdMWg_dk5lqbKbMGxU6iJHTGDQRvNUsQUZ-GA/viewform" width="600" height="800"></iframe>
-  <iframe src="https://docs.google.com/spreadsheets/d/1XIo65u8Rxr_nfUrA2WylxNQI8oPqx7gRVc12rEa5OuY/edit?resourcekey=&gid=1173536971#gid=1173536971"  width="600" height="800"></iframe>
-  <iframe src="https://docs.google.com/spreadsheets/d/1WJ5bBVULuvcCbTtekb4jAbY58cHOA0YmbLiuPDiQZ64/edit?=&gid=720675371#gid=720675371" width="800" height="800"></iframe>
-<iframe src="https://docs.google.com/spreadsheets/d/1V6Ez2yqOxEJ2GFLIdwPw-vI9FuinN7sk/edit" width="600" height="800"></iframe>
+  <iframe src="https://docs.google.com/spreadsheets/d/1XIo65u8Rxr_nfUrA2WylxNQI8oPqx7gRVc12rEa5OuY/edit?resourcekey=&gid=1173536971#gid=1173536971"  width="800" height="800"></iframe>
+  <iframe src="https://docs.google.com/spreadsheets/d/10C8uBGbFIU4zwBcxv_JZmSHor1Tms7ckE9qVzXKAyOc/edit?gid=0#gid=0" width="800" height="800"></iframe>
+<iframe src="https://docs.google.com/spreadsheets/d/1V6Ez2yqOxEJ2GFLIdwPw-vI9FuinN7sk/edit" width="800" height="800"></iframe>
 
   <!-- Votre code JavaScript principal -->
   <script>
@@ -132,8 +134,9 @@
 
     const csvURL1 = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSgn7Ua3wOiYoVnr2Tl-dSiBucRC_w0mUEJdMmdmeySAEiEBkBGyLmjuXcCSkR_AYzt_r92du7FfWHk/pub?gid=720675371&single=true&output=csv';
     const csvURL2 = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTwt2lwCfa9Tc3gA68tNu4ODy4Dki1xfU13HHqeD-0S7WT755Xu4BxeBRgPgJaadw/pub?output=csv';
-    const csvURL3 = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRJbceq23ZJu_g-hTTFpIEEQbypFTT_dCABIIUcLcrUo9rilU0MmRG-NGFUCEJ_dw/pub?gid=1056850233&single=true&output=csv';
-    let currentCSV = csvURL1;
+    const csvURL3 = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQA6e2ve73uElpVbjQ4HGtpW3-2wNSGK6xBvwbvbQyO3LxS9c6iIG2Ttiee1Kd23Pz87IZemeSZSGPZ/pub?output=csv';
+    const csvURL4 = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSYViTI5B9xL51iEX_zHguzA0Ly56oipuCWlexXVdzl0JKXjGhd6_ntD8yO6l-tUP0ZoeHrVCn4Lq7j/pubhtml?gid=1173536971&single=true';
+    let currentCSV = csvURL3;
 
     // Fonctions de création des icônes SVG
     function createPhoneSVG(color) { return `data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><text x="5" y="30" font-size="30" fill="${color}">📞</text></svg>`; }
@@ -212,15 +215,34 @@
           status: row[8]?.trim() || '',
           cityName: row[2]?.trim() || '',
           espece: row[1]?.trim() || '',
-          Numero: row[3]?.trim() || '',
+          Numero: row[6]?.trim() || '',
           address: (row[2]?.trim() ? row[2].trim() : '') || '',
           repondu: row[1]?.trim() || '',
           info: row[5]?.trim() || '',
-          marqueur: row[7]?.trim() || '',
+          marqueur: row[6]?.trim() || '',
           Emoj: row[12]?.trim() || '',
           Emoj2: row[13]?.trim() || '',
           jourdispo: row[14]?.trim() || ''
         };
+      } 
+      else if (csvUrl === csvURL4) {
+        return {
+          name: row[2]?.trim() || '',
+          status: row[8]?.trim() || '',
+          cityName: row[3]?.trim() || '',
+          espece: row[1]?.trim() || '',
+          Numero: row[6]?.trim() || '',
+          address: (row[3]?.trim() ? row[3].trim() : '') || '',
+          repondu: row[1]?.trim() || '',
+          info: row[5]?.trim() || '',
+          marqueur: row[6]?.trim() || '',
+          Emoj: row[12]?.trim() || '',
+          Emoj2: row[13]?.trim() || '',
+          jourdispo: row[14]?.trim() || '',
+          Esp: row[8]?.trim() || ''  
+
+        };
+
       }
       return {};
     }
@@ -276,20 +298,27 @@
     function switchMap() {
       markers.forEach(marker => marker.setMap(null));
       markers = [];
-      currentCSV = (currentCSV === csvURL1) ? csvURL2 : csvURL1;
+      currentCSV = (currentCSV === csvURL3) ? csvURL2 : csvURL3;
       updateData(currentCSV);
     }
     function switchMapToCSV3() {
       markers.forEach(marker => marker.setMap(null));
       markers = [];
-      currentCSV = (currentCSV !== csvURL3) ? csvURL3 : csvURL1;
+      currentCSV = (currentCSV !== csvURL1) ? csvURL1 : csvURL3;
       updateData(currentCSV);
     }
-   
+    function switchMapToCSV4() {
+      markers.forEach(marker => marker.setMap(null));
+      markers = [];
+      currentCSV = (currentCSV !== csvURL4) ? csvURL4 : csvURL3;
+      updateData(currentCSV);
+    }
     // Gestion des événements une fois le DOM chargé
     document.addEventListener("DOMContentLoaded", function() {
       document.getElementById("switchMapButton").addEventListener("click", switchMap);
       document.getElementById("switchMapButton2").addEventListener("click", switchMapToCSV3);
+      document.getElementById("switchMapButton3").addEventListener("click", switchMapToCSV4);
+
       document.getElementById("search-button").addEventListener("click", searchMarkers);
       document.getElementById("manualSearchButton").addEventListener("click", manualSearch);
       // Correction de l'ID pour l'écoute de la touche "Enter"
@@ -402,12 +431,15 @@
                       icon = { url: createTriangleSVG(markerColor) };
                     }
                     icon.optimized = false;
+
+                    
                 
                     
                                           
                     } else {
                     // Pour csvURL3
                     if (address === cityName) {
+                      markerColor = getColorFromNumero(Numero);
                       icon = {
                         path: google.maps.SymbolPath.CIRCLE,
                         fillColor: markerColor,
