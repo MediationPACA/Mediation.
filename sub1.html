@@ -144,7 +144,7 @@
     const csvURL2 = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTwt2lwCfa9Tc3gA68tNu4ODy4Dki1xfU13HHqeD-0S7WT755Xu4BxeBRgPgJaadw/pub?output=csv';
     const csvURL3 = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQA6e2ve73uElpVbjQ4HGtpW3-2wNSGK6xBvwbvbQyO3LxS9c6iIG2Ttiee1Kd23Pz87IZemeSZSGPZ/pub?output=csv';
     const csvURL4 = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSYViTI5B9xL51iEX_zHguzA0Ly56oipuCWlexXVdzl0JKXjGhd6_ntD8yO6l-tUP0ZoeHrVCn4Lq7j/pub?output=csv';
-    let currentCSV = csvURL3;
+    let currentCSV = csvURL4;
 
     // Fonctions de création des icônes SVG
     function createPhoneSVG(color) { return `data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><text x="5" y="30" font-size="30" fill="${color}">📞</text></svg>`; }
@@ -246,7 +246,7 @@
           marqueur: row[6]?.trim() || '',
           Emoj: row[12]?.trim() || '',
           Emoj2: row[13]?.trim() || '',
-          jourdispo: row[14]?.trim() || '',
+          jourdispo: row[6]?.trim() || '',
           Esp: row[8]?.trim() || ''  
 
         };
@@ -279,23 +279,15 @@
       } else if (csvUrl === csvURL3) {
         legend.style.display = 'inline';
         legendList.innerHTML = `
-          <span style="font-size:20px;">💉</span> : Euthanasie
-          <span style="font-size:20px;">🩺</span> : Diagnostique
-          <span style="font-size:20px;">🍼</span> : Nursing
-          <span style="font-size:20px;">🛠️</span> : Opération
-          <span style="font-size:20px;">📦</span> : Point Relais
-          <span style="font-size:20px;">🩹</span> : Premiers soins
-          <span style="font-size:20px;">🩻</span> : Radiographie
-          <br> <span style="font-size:20px;">🦤</span> : Goéland
-          <span style="font-size:20px;">🦊</span> : Mammifères
-          <span style="font-size:20px;">🦆</span> : Oiseaux
-          <span style="font-size:20px;">🦔</span> : Petits mammifères
-          <span style="font-size:20px;">🕊️</span> : Pigeons Tourterelles
-          <span style="font-size:20px;">🦅</span> : Rapaces
-          <span style="font-size:20px;">🦎</span> : Reptiles
-          <span style="font-size:20px;">🐢</span> : Tortues
-          <span style="font-size:20px;">🦇</span> : Chiroptères
-          <span style="font-size:20px;">🚫🦤</span> : Pas goéland
+        
+        `;
+      } else if (csvUrl === csvURL4) {
+        legend.style.display = 'inline';
+        legendList.innerHTML = `
+          <span style="font-size:20px;">Rouge : pour aujourd'hui</span> 
+          <span style="font-size:20px;">Orange : pour demain</span> 
+          <span style="font-size:20px;">Vert : pour après demain</span>
+          
         `;
       } else {
         legend.style.display = 'none';
@@ -427,21 +419,50 @@
                       icon = { url: createTriangleSVG(markerColor) };
                     }
                     icon.optimized = false;
-                  } else if (csvUrl === csvURL2) {  
-                    markerColor = getColorFromNumero(Numero);                  
-                    const lowerEsp = Esp.toLowerCase();
-                    if(lowerEsp.includes("acceptent")) {
-                      icon = { url: createaccSVG(markerColor) };
-                    
-                    } else if(lowerEsp.includes("refusent")) {
-                      icon = { url: createrefSVG(markerColor) };
-                    } else {
-                      icon = { url: createTriangleSVG(markerColor) };
-                    }
-                    icon.optimized = false;
+                  } else if (csvUrl === csvURL2) {
+  markerColor = getColorFromNumero(Numero);                  
+  const lowerEsp = Esp.toLowerCase();
+  if(lowerEsp.includes("acceptent")) {
+    icon = { url: createaccSVG(markerColor) };
+  } else if(lowerEsp.includes("refusent")) {
+    icon = { url: createrefSVG(markerColor) };
+  } else {
+    icon = { url: createTriangleSVG(markerColor) };
+  }
+  icon.optimized = false;
+} else if (csvUrl === csvURL4) {
+  const today = new Date();
+  
+  // Format français ? Ex: "15/04/2025"
+  const parts = jourdispo.split('/');
+  const dateValue = (parts.length === 3)
+    ? new Date(+parts[2], parts[1] - 1, +parts[0])
+    : new Date(jourdispo);
 
-                    
-                
+  if (isNaN(dateValue) || dateValue < today.setHours(0, 0, 0, 0)) {
+    continue;
+  }
+
+  const diffDays = Math.floor((dateValue - today) / (1000 * 60 * 60 * 24));
+  if (diffDays === 0) {
+    markerColor = "#FF0000"; // Rouge pour aujourd'hui
+  } else if (diffDays === 1) {
+    markerColor = "#FFA500"; // Orange pour demain
+  } else {
+    markerColor = "#00FF00"; // vert après-demain ou plus
+  }
+
+  icon = {
+    path: google.maps.SymbolPath.CIRCLE,
+    fillColor: markerColor,
+    fillOpacity: 0.8,
+    strokeColor: 'black',
+    strokeWeight: 2,
+    scale: 10,
+  };
+
+
+
                     
                                           
                     } else {
@@ -488,8 +509,8 @@
                   } else {
                     debugLine = `${name} --- ${espece} --- ${cityName} NUMERO ${Numero} \nHoraires : ${jourdispo} \n| ${info} ${Emoj} | ${Emoj2}`;
                   }
-                  debugInfoHTML += `<div id="debug-line-${markerCount}" data-index="${markerCount}">${debugLine}</div>\n`;
-                  markerCount++;
+                  debugInfoHTML += `<div> id="debug-line-${markerCount}" data-index="${markerCount}">${debugLine}</div> \n`;
+                  markerCount++; 
                 } catch (geocodeStatus) {
                   console.error(`Erreur de géocodage pour ${address}: ${geocodeStatus}`);
                 }
