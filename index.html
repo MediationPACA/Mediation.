@@ -58,21 +58,26 @@
     .navbar {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: none;
             padding: 10px;
             background-color: #7fa77b; /* Couleur de fond de la barre de navigation */
         }
         .logout-button {
-            background-color: #7fa77b; /* Couleur de déconnexion */
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 20px;
-            cursor: pointer;
-        }
-        .logout-button:hover {
-            background-color: #c82333; /* Couleur plus foncée au survol */
-        }
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  background-color: #7fa77b;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 14px 30px;
+  cursor: pointer;
+  z-index: 10;
+}
+.logout-button:hover {
+  background-color: #c82333;
+}
+
         .link1 {
   display: inline-block;
   padding: 3px 10px;
