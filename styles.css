@@ -132,3 +132,13 @@ button:focus { /* Ajout de l'état focus */
   #toggle-debug.open #arrow {
     transform: rotate(90deg);
   }
+  .mappage {
+  background-color: #7fa77b;
+    color: white;
+    padding: 0.75rem 1.5rem; /* 12px et 24px en rem */
+    border: none;
+    border-radius: 0.5rem; /* 8px en rem */
+    font-size: 1rem; /* 16px en rem */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
