@@ -134,7 +134,9 @@
   <!-- Iframes divers -->
   <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSejjieiCq3ZVbdMWg_dk5lqbKbMGxU6iJHTGDQRvNUsQUZ-GA/viewform" width="600" height="800"></iframe>
   <iframe src="https://docs.google.com/spreadsheets/d/1XIo65u8Rxr_nfUrA2WylxNQI8oPqx7gRVc12rEa5OuY/edit?resourcekey=&gid=1173536971#gid=1173536971"  width="800" height="800"></iframe>
- 
+  <p class="link"><a href="https://docs.google.com/spreadsheets/d/10C8uBGbFIU4zwBcxv_JZmSHor1Tms7ckE9qVzXKAyOc/edit?gid=0#gid=0" target="_blank">Contact Mairies</a></p>
+  <p class="link"><a href="https://docs.google.com/spreadsheets/d/1V6Ez2yqOxEJ2GFLIdwPw-vI9FuinN7sk/edit?gid=302918297#gid=302918297" target="_blank">Contact Diffusion</a></p>
+
   <!-- Votre code JavaScript principal -->
   <script>
     let map;
@@ -269,13 +271,7 @@
       if (csvUrl === csvURL1) {
         legend.style.display = 'inline';
         legendList.innerHTML = `
-          <span style="font-size:20px;">📞</span> : Contact en cours
-          <span style="font-size:20px;">✅</span> : Acceptent
-        <span style="font-size:20px;">❌</span> : Refusent 
-          <span style="font-size:20px;">☎️</span> : À contacter
-        
-          <span style="font-size:20px;">▲</span> : Autre
-        `;
+         `;
       } else if (csvUrl === csvURL2) {
         legend.style.display = 'inline';
         legendList.innerHTML = `
@@ -286,15 +282,22 @@
       } else if (csvUrl === csvURL3) {
         legend.style.display = 'inline';
         legendList.innerHTML = `
+         <span style="font-size:20px;">📞</span> : Contact en cours
+          <span style="font-size:20px;">✅</span> : Acceptent
+        <span style="font-size:20px;">❌</span> : Refusent 
+          <span style="font-size:20px;">☎️</span> : À contacter
+        
+          <span style="font-size:20px;">▲</span> : Autre
         
         `;
       } else if (csvUrl === csvURL4) {
         legend.style.display = 'inline';
         legendList.innerHTML = `
-          <span style="font-size:20px;">Rouge : pour aujourd'hui</span> 
-          <span style="font-size:20px;">Orange : pour demain</span> 
-          <span style="font-size:20px;">Vert : pour après demain</span>
-          
+          <span style="font-size:30px;color: red;">Rouge </span> : aujourd'hui ou demain
+          <span style="font-size:30px;color: orange;">Orange </span> : Après demain
+          <span style="font-size:30px;color: yellow;">Jaune </span>: dans 3 à 5 jours
+                    <span style="font-size:30px;color: green;"> Vert </span>: 6 jours ou plus
+
         `;
       } else {
         legend.style.display = 'none';
@@ -451,13 +454,19 @@
   }
 
   const diffDays = Math.floor((dateValue - today) / (1000 * 60 * 60 * 24));
-  if (diffDays === 0) {
-    markerColor = "#FF0000"; // Rouge pour aujourd'hui
-  } else if (diffDays === 1) {
-    markerColor = "#FFA500"; // Orange pour demain
-  } else {
-    markerColor = "#00FF00"; // vert après-demain ou plus
-  }
+
+let markerColor;
+
+if (diffDays === 0 || diffDays === 1) {
+  markerColor = "#FF0000"; // Rouge : Aujourd'hui ou demain
+} else if (diffDays === 2) {
+  markerColor = "#FFA500"; // Orange : Après-demain
+} else if (diffDays >= 3 && diffDays <= 5) {
+  markerColor = "#FFFF00"; // Jaune : dans 3 à 5 jours
+} else {
+  markerColor = "#00FF00"; // Vert : 6 jours ou plus
+}
+
 
   icon = {
     path: google.maps.SymbolPath.CIRCLE,
