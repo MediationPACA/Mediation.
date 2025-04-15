@@ -101,9 +101,9 @@
 
   <!-- Barre de recherche et légende -->
   <div id="search-container">
-    <button id="switchMapButton">Afficher/Enlever la carte Diffusion</button>
+    <button id="switchMapButton">Afficher/Enlever la carte vétérinaire</button>
     <button id="switchMapButton2">Afficher/Enlever la carte COMCOM</button>
-    <button id="switchMapButton3">Afficher/Enlever la carte Agenda</button>
+    <button id="switchMapButton3">Afficher/Enlever la carte Mairie</button>
 
     <input type="text" id="search-input" placeholder="Rechercher un marqueur" />
     <button id="search-button">Rechercher</button>
@@ -237,16 +237,16 @@
         return {
           name: row[2]?.trim() || '',
           status: row[8]?.trim() || '',
-          cityName: row[3]?.trim() || '',
+          cityName: row[4]?.trim() || '',
           espece: row[1]?.trim() || '',
-          Numero: row[6]?.trim() || '',
-          address: (row[3]?.trim() ? row[3].trim() : '') || '',
+          Numero: row[2]?.trim() || '',
+          address: (row[4]?.trim() ? row[4].trim() : '') || '',
           repondu: row[1]?.trim() || '',
-          info: row[5]?.trim() || '',
+          info: row[6]?.trim() || '',
           marqueur: row[6]?.trim() || '',
           Emoj: row[12]?.trim() || '',
           Emoj2: row[13]?.trim() || '',
-          jourdispo: row[6]?.trim() || '',
+          jourdispo: row[7]?.trim() || '',
           Esp: row[8]?.trim() || ''  
 
         };
@@ -298,19 +298,19 @@
     function switchMap() {
       markers.forEach(marker => marker.setMap(null));
       markers = [];
-      currentCSV = (currentCSV === csvURL3) ? csvURL2 : csvURL3;
+      currentCSV = (currentCSV === csvURL4) ? csvURL2 : csvURL4;
       updateData(currentCSV);
     }
     function switchMapToCSV3() {
       markers.forEach(marker => marker.setMap(null));
       markers = [];
-      currentCSV = (currentCSV !== csvURL1) ? csvURL1 : csvURL3;
+      currentCSV = (currentCSV !== csvURL1) ? csvURL1 : csvURL4;
       updateData(currentCSV);
     }
     function switchMapToCSV4() {
       markers.forEach(marker => marker.setMap(null));
       markers = [];
-      currentCSV = (currentCSV !== csvURL4) ? csvURL4 : csvURL3;
+      currentCSV = (currentCSV === csvURL4) ? csvURL3 : csvURL4;
       updateData(currentCSV);
     }
     // Gestion des événements une fois le DOM chargé
