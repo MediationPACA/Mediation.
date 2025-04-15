@@ -16,6 +16,8 @@
     .header h1 { font-size: 30px; font-weight: bold; }
     .header p { font-size: 20px; font-weight: bold; max-width: 600px; margin-top: 1px; }
     .phone { font-size: 32px; font-weight: bold; margin-top: 20px; }
+    .page { font-size: 22px; font-weight: bold; margin-top: 3px; }
+
     #map { height: 410px; width: 100%; }
     #error-message { color: red; }
     #debug-info { margin-top: 10px; white-space: pre-wrap; font-family: Arial, sans-serif; }
@@ -38,16 +40,21 @@
       background-color: #7fa77b;
     }
     .logout-button {
-      background-color: #7fa77b;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      padding: 10px 20px;
-      cursor: pointer;
-    }
-    .logout-button:hover {
-      background-color: #c82333;
-    }
+  position: absolute;
+  top: 20px;
+  right:30px;
+  background-color: #7fa77b;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 15px 30px;
+  cursor: pointer;
+  z-index: 10;
+}
+.logout-button:hover {
+  background-color: #c82333;
+}
+
 .sites {
   padding: 11px 12px;
   font-weight: bold;
@@ -88,9 +95,10 @@
       <strong>DUMBO</strong>
     </p>
     <p class="phone">0483650279</p>
+    
     <button class="logout-button" onclick="deconnexion()">Déconnexion</button>
   </div>
-  <div>
+  <div><p class="page">Agenda/Diffusion</p>
     <button class="sites" onclick="window.location.href='index.html'">Médiation</button>
     <button class= "sites" onclick="window.location.href='sites.html'"> Sites Utiles </button>
     <button class= "sites" onclick="window.location.href='DOC.html'"> Doc Véto/bénévoles </button>
