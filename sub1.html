@@ -249,7 +249,7 @@
           cityName: row[4]?.trim() || '',
           espece: row[1]?.trim() || '',
           Numero: row[2]?.trim() || '',
-          address: (row[4]?.trim() ? row[4].trim() : '') || '',
+          address: (row[9]?.trim() ? row[9].trim() : row[4]?.trim()) || '',
           repondu: row[1]?.trim() || '',
           info: row[6]?.trim() || '',
           marqueur: row[6]?.trim() || '',
