@@ -442,8 +442,6 @@
   icon.optimized = false;
 } else if (csvUrl === csvURL4) {
   const today = new Date();
-  
-  // Format français ? Ex: "15/04/2025"
   const parts = jourdispo.split('/');
   const dateValue = (parts.length === 3)
     ? new Date(+parts[2], parts[1] - 1, +parts[0])
@@ -455,27 +453,39 @@
 
   const diffDays = Math.floor((dateValue - today) / (1000 * 60 * 60 * 24));
 
-let markerColor;
+  let markerColor;
+  if (diffDays === 0 || diffDays === 1) {
+    markerColor = "#FF0000"; // rouge
+  } else if (diffDays === 2) {
+    markerColor = "#FFA500"; // orange
+  } else if (diffDays >= 3 && diffDays <= 5) {
+    markerColor = "#FFFF00"; // jaune
+  } else {
+    markerColor = "#00FF00"; // vert
+  }
 
-if (diffDays === 0 || diffDays === 1) {
-  markerColor = "#FF0000"; // Rouge : Aujourd'hui ou demain
-} else if (diffDays === 2) {
-  markerColor = "#FFA500"; // Orange : Après-demain
-} else if (diffDays >= 3 && diffDays <= 5) {
-  markerColor = "#FFFF00"; // Jaune : dans 3 à 5 jours
-} else {
-  markerColor = "#00FF00"; // Vert : 6 jours ou plus
-}
-
-
-  icon = {
-    path: google.maps.SymbolPath.CIRCLE,
-    fillColor: markerColor,
-    fillOpacity: 0.8,
-    strokeColor: 'black',
-    strokeWeight: 2,
-    scale: 10,
-  };
+  // 👇 Ici on choisit la forme selon la colonne Emoj
+  if (!Emoj || Emoj.trim() === "") {
+    // carré coloré selon jourdispo
+    icon = {
+      path: 'M -5 -5 L 5 -5 L 5 5 L -5 5 Z',
+      fillColor: markerColor,
+      fillOpacity: 0.8,
+      strokeColor: 'black',
+      strokeWeight: 2,
+      scale: 2,
+    };
+  } else {
+    // cercle coloré selon jourdispo
+    icon = {
+      path: google.maps.SymbolPath.CIRCLE,
+      fillColor: markerColor,
+      fillOpacity: 0.8,
+      strokeColor: 'black',
+      strokeWeight: 2,
+      scale: 10,
+    };
+  }
 
 
 
