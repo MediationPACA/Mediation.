@@ -291,14 +291,34 @@
         
         `;
       } else if (csvUrl === csvURL4) {
-        legend.style.display = 'inline';
-        legendList.innerHTML = `
-          <span style="font-size:30px;color: red;">Rouge </span> : aujourd'hui ou demain
-          <span style="font-size:30px;color: orange;">Orange </span> : Après demain
-          <span style="font-size:30px;color: yellow;">Jaune </span>: dans 3 à 5 jours
-                    <span style="font-size:30px;color: green;"> Vert </span>: 6 jours ou plus
+  legend.style.display = 'inline';
+  legendList.innerHTML = `
+    <div style="margin-bottom: 5px;">
+      <span style="display: inline-block; width: 20px; height: 20px; background-color: red; border-radius: 50%; margin-right: 5px; border: 2px solid black;"></span>
+      <strong>Rouge (rond)</strong> : aujourd'hui ou demain (AVEC QUI rempli)
+    </div>
+    
+   
+    <div style="margin-bottom: 5px;">
+      <span style="display: inline-block; width: 20px; height: 20px; background-color: orange; border-radius: 50%; margin-right: 5px; border: 2px solid black;"></span>
+      <strong>Orange (rond)</strong> : après-demain (AVEC QUI rempli)
+    </div>
+    
+    <div style="margin-bottom: 5px;">
+      <span style="display: inline-block; width: 20px; height: 20px; background-color: yellow; border-radius: 50%; margin-right: 5px; border: 2px solid black;"></span>
+      <strong>Jaune (rond)</strong> : dans 3 à 5 jours (AVEC QUI rempli)
+    </div>
+    
+    <div style="margin-bottom: 5px;">
+      <span style="display: inline-block; width: 20px; height: 20px; background-color: green; border-radius: 50%; margin-right: 5px; border: 2px solid black;"></span>
+      <strong>Vert (rond)</strong> : 6 jours ou plus (AVEC QUI rempli)
+    </div>
+    <div>
+      <span style="display: inline-block; width: 20px; height: 20px; background-color: black; margin-right: 5px; border: 2px solid black;"></span>
+      <strong> (carré)</strong>  (AVEC QUI vide)
+    </div>
+  `;
 
-        `;
       } else {
         legend.style.display = 'none';
       }
