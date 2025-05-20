@@ -9,7 +9,7 @@
     body.noscroll {
       overflow: hidden;
     }
-    /* Vos styles CSS */
+    /* CSS */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: Arial, sans-serif; text-align: center; background-color: #bfecbb; }
     .header { position: relative; width: 100%; height: 310px; background: url('marty.png') no-repeat center; background-size: cover; display: flex; flex-direction: column; justify-content: center; align-items: center; color: black; padding: 20px; }
@@ -60,7 +60,7 @@
   font-weight: bold;
 }
 .sites:hover {
-            background-color: #c82333; /* Couleur plus foncée au survol */
+            background-color: #c82333; 
         }
   </style>
   <script src="auth.js"></script>
@@ -80,7 +80,7 @@
     }
   </script>
   
-  <!-- Inclusion des bibliothèques -->
+  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 </head>
 <body onload="checkAccess()">
@@ -108,7 +108,7 @@
 
   <div id="map"></div>
 
-  <!-- Barre de recherche et légende -->
+  <!-- recherche et légende -->
   <div id="search-container">
     <button id="switchMapButton">Afficher/Enlever la carte vétérinaire</button>
     <button id="switchMapButton2">Afficher/Enlever la carte COMCOM</button>
@@ -131,13 +131,13 @@
     </div>
   </div>
 
-  <!-- Iframes divers -->
+  
   <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSejjieiCq3ZVbdMWg_dk5lqbKbMGxU6iJHTGDQRvNUsQUZ-GA/viewform" width="600" height="800"></iframe>
   <iframe src="https://docs.google.com/spreadsheets/d/1XIo65u8Rxr_nfUrA2WylxNQI8oPqx7gRVc12rEa5OuY/edit?resourcekey=&gid=1173536971#gid=1173536971"  width="800" height="800"></iframe>
   <p class="link"><a href="https://docs.google.com/spreadsheets/d/10C8uBGbFIU4zwBcxv_JZmSHor1Tms7ckE9qVzXKAyOc/edit?gid=0#gid=0" target="_blank">Contact Mairies</a></p>
   <p class="link"><a href="https://docs.google.com/spreadsheets/d/1V6Ez2yqOxEJ2GFLIdwPw-vI9FuinN7sk/edit?gid=302918297#gid=302918297" target="_blank">Contact Diffusion</a></p>
 
-  <!-- Votre code JavaScript principal -->
+  
   <script>
     let map;
     let markers = [];
@@ -155,7 +155,7 @@
     const csvURL4 = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSYViTI5B9xL51iEX_zHguzA0Ly56oipuCWlexXVdzl0JKXjGhd6_ntD8yO6l-tUP0ZoeHrVCn4Lq7j/pub?output=csv';
     let currentCSV = csvURL4;
 
-    // Fonctions de création des icônes SVG
+    //  icônes SVG
     function createPhoneSVG(color) { return `data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><text x="5" y="30" font-size="30" fill="${color}">📞</text></svg>`; }
     function createAmbulanceSVG(color) { return `data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><text x="5" y="30" font-size="30" fill="${color}">🚑</text></svg>`; }
     function createCrossSVG(color) { return `data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><text x="5" y="30" font-size="30" fill="${color}">🩺</text></svg>`; }
@@ -174,7 +174,7 @@
     
     function createTriangleSVG(color) { return `data:image/svg+xml;charset=UTF-8,<svg width="20" height="20" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,5 25,25 5,25" fill="${color}" stroke="black" stroke-width="2" /></svg>`; }
 
-    // Fonction de géocodage avec cache
+    // géocodage avec cache
     async function geocodeWithCache(geocoder, cityName) {
       let cache = JSON.parse(localStorage.getItem(GEOCODING_CACHE_KEY) || '{}');
       if (cache[cityName]) {
@@ -265,7 +265,7 @@
       return {};
     }
 
-    // Mise à jour de la légende selon le CSV utilisé
+    // légende selon le CSV utilisé
     function updateLegend(csvUrl) {
       const legend = document.getElementById("legend");
       const legendList = document.getElementById("legend-list");
@@ -325,7 +325,7 @@
       }
     }
 
-    // Fonctions de changement de CSV / affichage de la carte
+    // changement de CSV / affichage de la carte
     function switchMap() {
       markers.forEach(marker => marker.setMap(null));
       markers = [];
@@ -352,7 +352,6 @@
 
       document.getElementById("search-button").addEventListener("click", searchMarkers);
       document.getElementById("manualSearchButton").addEventListener("click", manualSearch);
-      // Correction de l'ID pour l'écoute de la touche "Enter"
       const input = document.getElementById("manualSearchInput");
     input.addEventListener("keydown", function(e) {
       if (e.key === "Enter") {
@@ -367,7 +366,7 @@
       }
     });
     
-    // Initialisation de la carte
+    // Initialisation carte
     function initMap() {
       map = new google.maps.Map(document.getElementById('map'), {
         zoom: 8.8,
@@ -378,7 +377,7 @@
       setInterval(() => updateData(currentCSV), 120000);
     }
 
-    // Calcul des points pour éviter le chevauchement des marqueurs
+    // éviter le chevauchement des marqueurs
     function calculateCirclePoints(center, maxPoints, radius) {
       const points = [];
       for (let i = 0; i < maxPoints; i++) {
@@ -390,7 +389,7 @@
       return points;
     }
 
-    // Mise à jour des données (lecture du CSV et ajout des marqueurs)
+    // lecture du CSV et ajout des marqueurs
     async function updateData(csvUrl) {
       updateLegend(csvUrl);
       const minColumns = (csvUrl === csvURL1) ? 2 : 2;
@@ -410,8 +409,7 @@
               const row = results.data[i];
               if (row.length >= minColumns) {
                 let { name, repondu, Numero, cityName, espece, address, status, seil, Esp, info, marqueur, Emoj, Emoj2, poste, jourdispo } = extractData(row, csvUrl);
-                // Suppression de toute logique de filtrage basée sur le status.
-                // Ainsi, tous les marqueurs seront affichés, quel que soit leur status.
+          
                 
                 if (csvUrl === csvURL2) {
                 
@@ -485,9 +483,9 @@
     markerColor = "#00FF00"; // vert
   }
 
-  // 👇 Ici on choisit la forme selon la colonne Emoj
+ 
   if (!Emoj || Emoj.trim() === "") {
-    // carré coloré selon jourdispo
+    // carré coloré 
     icon = {
       path: 'M -5 -5 L 5 -5 L 5 5 L -5 5 Z',
       fillColor: markerColor,
@@ -497,7 +495,7 @@
       scale: 2,
     };
   } else {
-    // cercle coloré selon jourdispo
+    // cercle coloré 
     icon = {
       path: google.maps.SymbolPath.CIRCLE,
       fillColor: markerColor,
@@ -513,7 +511,7 @@
                     
                                           
                     } else {
-                    // Pour csvURL3
+                    // csvURL3
                     if (address === cityName) {
                       markerColor = getColorFromNumero(Numero);
                       icon = {
@@ -573,7 +571,7 @@
         document.getElementById('error-message').textContent = "Erreur lors de la récupération des données. Vérifiez la console.";
       }
     }
-    // Fonction de recherche marqueurs
+    // recherche marqueurs
     function searchMarkers() {
       const searchTerm = document.getElementById("search-input").value.trim().toLowerCase();
       if (!searchTerm) return;
@@ -636,7 +634,7 @@
         alert("Adresse introuvable : " + err);
       }
     }
-    // Fonction utilitaire pour générer une couleur à partir d'un numéro
+    // couleur à partir d'un numéro
     function getColorFromNumero(numero) {
       const hash = Array.from(numero).reduce((acc, char) => acc + char.charCodeAt(0), 0);
       const r = (hash * 115) % 256;

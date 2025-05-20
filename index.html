@@ -8,7 +8,7 @@
  
   <style>
     body.noscroll {
-        overflow: hidden; /* Désactive le défilement */
+        overflow: hidden; 
     }
 </style>
   <script src="auth.js"></script>
@@ -18,7 +18,7 @@
     };
 
     window.onload = function() {
-        window.scrollTo(0, 0); // Reste en haut de la page
+        window.scrollTo(0, 0); 
     };
 </script>
   <script>
@@ -29,10 +29,10 @@
     }
   </script>
   
-  <!-- Inclusion des bibliothèques -->
+  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
   <style>
-    /* Vos styles CSS */
+    /*  CSS */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: Arial, sans-serif; text-align: center; background-color: #bfecbb; }
     .header { position: relative; width: 100%; height: 310px; background: url('marty.png') no-repeat center; background-size: cover; display: flex; flex-direction: column; justify-content: center; align-items: center; color: black; padding: 20px; }
@@ -61,7 +61,7 @@
             justify-content: space-between;
             align-items: none;
             padding: 10px;
-            background-color: #7fa77b; /* Couleur de fond de la barre de navigation */
+            background-color: #7fa77b; 
         }
         .logout-button {
   position: absolute;
@@ -99,7 +99,7 @@
   font-weight: bold;
 }
 .sites:hover {
-            background-color: #c82333; /* Couleur plus foncée au survol */
+            background-color: #c82333; 
         }
   </style>
 </head>
@@ -125,7 +125,7 @@
 
   <div id="map"></div>
 
-  <!-- Barre de recherche et légende -->
+  
   <div id="search-container">
     <button id="switchMapButton">Afficher/Enlever la carte bénévoles</button>
     <button id="switchMapButton2">Afficher/Enlever la carte Relai</button>
@@ -151,7 +151,7 @@
     
   </div>
 
-  <!-- Iframes divers -->
+  
   <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdYmy3eCjHTysUDNlxZLb3flDGO8rR5OBlYthfuRYx3zOSZNA/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Chargement…</iframe>
   <p class="link"><a href="https://docs.google.com/spreadsheets/d/1WJ5bBVULuvcCbTtekb4jAbY58cHOA0YmbLiuPDiQZ64/edit?resourcekey=&gid=527237974#gid=527237974" target="_blank">Médiation</a></p>
 
@@ -164,7 +164,7 @@
   <iframe src="https://docs.google.com/document/d/1rtHrRyi4FYOWsCzVXqs7j0Zb_JFObA4NflO_UyifUnw/edit?" width="800px" height="1000"></iframe>
   <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1-tf56PIvRYV-y_Zvg2n36OfwC4Sv-MY&femb=1&ll=43.4647048189242%2C6.29414399999999&z=9" width="800" height="800"></iframe>
 
-  <!-- Votre code JavaScript principal -->
+  
   <script>
     let map;
     let markers = [];
@@ -182,7 +182,7 @@
     const csvURL3 = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRJbceq23ZJu_g-hTTFpIEEQbypFTT_dCABIIUcLcrUo9rilU0MmRG-NGFUCEJ_dw/pub?gid=1056850233&single=true&output=csv';
     let currentCSV = csvURL1;
 
-    // Fonctions de création des icônes SVG (les fonctions createPhoneSVG, createAmbulanceSVG, etc.)
+    //  icônes SVG
     function createPhoneSVG(color) { return `data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><text x="5" y="30" font-size="30" fill="${color}">📞</text></svg>`; }
     function createAmbulanceSVG(color) { return `data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><text x="5" y="30" font-size="30" fill="${color}">🚑</text></svg>`; }
     function createCrossSVG(color) { return `data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><text x="5" y="30" font-size="30" fill="${color}">🩺</text></svg>`; }
@@ -198,7 +198,7 @@
     function createInterventionSVG(color) {  return `data:image/svg+xml;utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"><text x="1" y="42" font-size="40" fill="${color}">⭕</text> </svg>`;
 }
 
-    // Fonction de géocodage avec cache
+    //  géocodage avec cache
     async function geocodeWithCache(geocoder, cityName) {
       let cache = JSON.parse(localStorage.getItem(GEOCODING_CACHE_KEY) || '{}');
       if (cache[cityName]) {
@@ -222,7 +222,7 @@
       });
     }
 
-    // Fonctions pour extraire les données CSV selon l'URL
+    // extraire les données CSV 
     function extractData(row, csvUrl) {
       if (csvUrl === csvURL1) {
         return {
@@ -273,7 +273,7 @@
       return {};
     }
 
-    // Mise à jour de la légende en fonction du CSV utilisé
+    //  légende en fonction du CSV utilisé
     function updateLegend(csvUrl) {
       const legend = document.getElementById("legend");
       const legendList = document.getElementById("legend-list");
@@ -325,7 +325,7 @@
       }
     }
 
-    // Fonctions de changement de CSV / affichage de la carte
+    // changement de CSV / affichage carte
     function switchMap() {
       markers.forEach(marker => marker.setMap(null));
       markers = [];
@@ -357,7 +357,7 @@
     document.getElementById("search-button").addEventListener("click", searchMarkers);
     document.getElementById("manualSearchButton").addEventListener("click", manualSearch);
 
-    // ✅ L'écouteur pour la touche "Entrée"
+    // "Entrée"
     const input = document.getElementById("manualSearchInput");
     input.addEventListener("keydown", function(e) {
       if (e.key === "Enter") {
@@ -373,7 +373,7 @@
     });
 
 
-    // Fonction d'initialisation de la carte
+    // initialisation carte
     function initMap() {
       map = new google.maps.Map(document.getElementById('map'), {
         zoom: 8.8,
@@ -384,7 +384,7 @@
       setInterval(() => updateData(currentCSV), 120000);
     }
 
-    // Calcul des points pour éviter le chevauchement des marqueurs
+    // éviter le chevauchement des marqueurs
     function calculateCirclePoints(center, maxPoints, radius) {
       const points = [];
       for (let i = 0; i < maxPoints; i++) {
@@ -396,7 +396,7 @@
       return points;
     }
 
-    // Mise à jour des données (lecture du CSV et ajout des marqueurs)
+    // lecture du CSV et ajout des marqueurs
     async function updateData(csvUrl) {
       updateLegend(csvUrl);
       const minColumns = (csvUrl === csvURL1) ? 14 : 5;
@@ -573,7 +573,7 @@ if (csvUrl === csvURL1 && status.trim().toLowerCase() === "intervention") {
       }
     }
 
-    // Fonction de recherche dans les marqueurs
+    // recherche marqueurs
     function searchMarkers() {
       const searchTerm = document.getElementById("search-input").value.trim().toLowerCase();
       if (!searchTerm) return;
@@ -603,7 +603,7 @@ if (csvUrl === csvURL1 && status.trim().toLowerCase() === "intervention") {
         debugLine.classList.add("highlight");
       }
     }
-// Rechercher manuellement une ville/adresse saisie par l'utilisateur
+// Rechercher une ville/adresse 
 async function manualSearch() {
   const input = document.getElementById("manualSearchInput");
   const query = input.value.trim();
@@ -620,7 +620,7 @@ async function manualSearch() {
     map.setCenter(latLng);
     map.setZoom(12);
 
-    // Ajoute un marqueur temporaire
+    // marqueur temporaire
     const marker = new google.maps.Marker({
       position: latLng,
       map: map,
@@ -646,7 +646,7 @@ async function manualSearch() {
   }
 }
 
-    // Fonction utilitaire pour générer une couleur à partir d'un numéro
+   //couleur à partir d'un numéro
     function getColorFromNumero(numero) {
       const hash = Array.from(numero).reduce((acc, char) => acc + char.charCodeAt(0), 0);
       const r = (hash * 115) % 256;
@@ -674,7 +674,7 @@ async function manualSearch() {
 
   </script>
 
-  <!-- Chargement asynchrone de l'API Google Maps, avec callback vers initMap -->
+  <!-- API Google Maps, avec callback vers initMap -->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfGs1gnWhKjQvgeebgoMtptzwjMwBKwh0&libraries=places,marker&callback=initMap" async defer></script>
 </body>
 </html>
