@@ -467,17 +467,20 @@
                     let finalPosition = new google.maps.LatLng(location.lat, location.lng);
                     let positionKey = finalPosition.lat() + "," + finalPosition.lng();
                     let positionsForLocation;
-                    if (markerPositions.has(positionKey)) {
-                      positionsForLocation = markerPositions.get(positionKey);
-                      positionsForLocation.count++;
-                    } else {
-                      positionsForLocation = { count: 0, circlePoints: [] };
-                      markerPositions.set(positionKey, positionsForLocation);
-                      const RADIUS = 2000;
-                      const MAX_POINTS = 15;
-                      positionsForLocation.circlePoints = calculateCirclePoints(finalPosition, MAX_POINTS, RADIUS);
-                    }
-                    finalPosition = positionsForLocation.circlePoints[positionsForLocation.count % positionsForLocation.circlePoints.length];
+                  if (markerPositions.has(positionKey)) {
+  positionsForLocation = markerPositions.get(positionKey);
+  const index = positionsForLocation.count;
+  positionsForLocation.count++;
+  finalPosition = positionsForLocation.circlePoints[index % positionsForLocation.circlePoints.length];
+} else {
+  positionsForLocation = { count: 1, circlePoints: [] }; // count=1 car premier marqueur
+  markerPositions.set(positionKey, positionsForLocation);
+  const RADIUS = 2000; // ou ta valeur souhaitée
+  const MAX_POINTS = 15;
+  positionsForLocation.circlePoints = calculateCirclePoints(finalPosition, MAX_POINTS, RADIUS);
+  finalPosition = finalPosition; // premier marqueur, position centrale
+}
+
 
                     if (csvUrl === csvURL1) {
                       const lowerEsp = Esp.toLowerCase();
