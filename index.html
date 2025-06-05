@@ -207,6 +207,8 @@
 
 
     function createOisSVG(color) { return `data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><text x="5" y="30" font-size="30" fill="${color}">🦆</text></svg>`; }
+    function createrapSVG(color) { return `data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><text x="5" y="30" font-size="30" fill="${color}">🦅</text></svg>`; }
+
     function createChiroSVG(color) { return `data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><text x="5" y="30" font-size="30" fill="${color}">🦇</text></svg>`; }
     function createDomSVG(color) { return `data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><text x="5" y="30" font-size="30" fill="${color}">🐶</text></svg>`; }
     function createreptSVG(color) { return `data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><text x="5" y="30" font-size="30" fill="${color}">🦎</text></svg>`; }
@@ -300,6 +302,7 @@
         legend.style.display = 'inline';
         legendList.innerHTML = `
           <span style="font-size:20px;">🦆:</span> Oiseaux
+          <span style="font-size:20px;">🦅:</span> Rapaces
           <span style="font-size:20px;">🦊:</span> Mammifères
           <span style="font-size:20px;">🦇:</span> Chiroptères
           <span style="font-size:20px;">🐍:</span> Serpents
@@ -501,6 +504,8 @@
                         icon = { url: createamphiSVG(markerColor) };
                       } else if(lowerEsp.includes("reptile")) {
                         icon = { url: createreptSVG(markerColor) };
+                      } else if(lowerEsp.includes("rapace")) {
+                        icon = { url: createrapSVG(markerColor) };
                       } else {
                         icon = { url: createTriangleSVG(markerColor) };
                       }
