@@ -17,9 +17,6 @@
         return undefined; // Évite le pop-up de confirmation
     };
 
-    window.onload = function() {
-        window.scrollTo(0, 0); 
-    };
 </script>
   <script>
     try {
@@ -32,40 +29,34 @@
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
   <style>
- /*  CSS */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: Arial, sans-serif; text-align: center; background-color: #bfecbb; }
-    .header { position: relative; width: 100%; height: 310px; background: url('marty.png') no-repeat center; background-size: cover; display: flex; flex-direction: column; justify-content: center; align-items: center; color: black; padding: 20px; }
-    .header h1 { font-size: 30px; font-weight: bold; }
-    .header p { font-size: 20px; font-weight: bold; max-width: 600px; margin-top: 1px; }
-    .phone { font-size: 32px; font-weight: bold; margin-top: 20px; }
-    .page { font-size: 22px; font-weight: bold; margin-top: 3px; }
-    #map { height: 410px; width: 100%; }
-    #error-message { color: red; }
-    #debug-info { margin-top: 10px; white-space: pre-wrap; font-family: Arial, sans-serif; }
-    #legend { margin-top: 1px; padding: 1px; border: 0px solid black; width: fit-content; background-color: none; font-family: Arial, sans-serif; }
-    #legend ul { list-style: none; padding: 0; margin: 0; }
-    #legend li { margin-bottom: 4px; }
-    #search-container { margin: 10px 0; font-family: Arial, sans-serif; }
-    #search-input { padding: 5px; width: 250px; font-size: 14px; }
-    #search-button { padding: 5px 10px; font-size: 14px; }
-    #switchMapButton { padding: 5px 10px; font-size: 14px; }
-    #switchMapButton2 { padding: 5px 10px; font-size: 14px; }
-    #switchMapButtonUrgence { padding: 5px 10px; font-size: 14px; }
-    #switchMapButtonU { padding: 5px 10px; font-size: 14px; }
+ /* ========== Reset de base ========== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { 
+  font-family: Arial, sans-serif; 
+  text-align: center; 
+  background-color: #bfecbb; 
+}
 
-    #manualSearchButton { padding: 5px 10px; font-size: 14px; }
-    #manualSearchInput { padding: 5px 20px; font-size: 14px; }
-    #toggle-debug { padding: 5px 10px; font-size: 14px; }
-    .highlight { background-color: yellow; }
-    .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: none;
-            padding: 10px;
-            background-color: #7fa77b; 
-        }
-        .logout-button {
+/* ========== Header ========== */
+.header { 
+  position: relative; 
+  width: 100%; 
+  min-height: 250px; 
+  background: url('marty.png') no-repeat center; 
+  background-size: cover; 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
+  color: black; 
+  padding: 20px; 
+}
+.header h1 { font-size: 30px; font-weight: bold; }
+.header p { font-size: 20px; font-weight: bold; max-width: 600px; margin-top: 1px; }
+.phone { font-size: 28px; font-weight: bold; margin-top: 20px; }
+
+/* ========== Boutons et liens ========== */
+.logout-button {
   position: absolute;
   top: 20px;
   right: 30px;
@@ -77,44 +68,81 @@
   cursor: pointer;
   z-index: 10;
 }
-.logout-button:hover {
-  background-color: #c82333;
+.logout-button:hover { background-color: #c82333; }
+
+.link1, .link2, .sites {
+  display: inline-block;
+  background-color: #e6e6e6;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  border-radius: 5px;
+  margin: 5px;
+  cursor: pointer;
+}
+.link1 { padding: 6px 12px; }
+.link2 { padding: 10px 20px; }
+.sites { padding: 11px 12px; font-weight: bold; }
+
+.link1:hover, .link2:hover, .sites:hover { background-color: #7fa77b; }
+.sites:hover { background-color: #c82333; }
+
+/* ========== Carte Google Maps ========== */
+#map {
+  width: 100%;
+  height: 60vh; /* hauteur adaptative */
+  margin: 15px 0;
 }
 
-        .link1 {
-  display: inline-block;
-  padding: 3px 10px;
-  background-color: #e6e6e6;
-  color: rgb(0, 0, 0);
-  text-decoration: none;
-  border-radius: 5px;
-  font-weight: none;
+
+/* ========== Recherche et légende ========== */
+#search-container { margin: 15px 0; }
+#search-input, #manualSearchInput {
+  padding: 8px;
+  width: 250px;
+  font-size: 14px;
+  max-width: 100%;
 }
-.link1:hover {
-  background-color: #7fa77b;
+button { padding: 6px 12px; font-size: 14px; margin: 5px 3px; }
+.highlight { background-color: yellow; }
+#legend { margin-top: 10px; }
+
+/* ========== Debug section ========== */
+#debug-info { 
+  margin-top: 10px; 
+  white-space: pre-wrap; 
+  font-family: Arial, sans-serif; 
+  font-size: 14px; 
+  text-align: left; 
+  padding: 10px;
 }
-.link2 {
-  display: inline-block;
-  padding: 9px 30px;
-  background-color: #e6e6e6;
-  color: rgb(0, 0, 0);
-  text-decoration: none;
-  border-radius: 5px;
-  font-weight: none;
+
+/* ========== Responsive Mobile ========== */
+@media (max-width: 768px) {
+  .header h1 { font-size: 22px; }
+  .header p { font-size: 16px; }
+  .phone { font-size: 20px; }
+
+  .logout-button {
+    padding: 10px 20px;
+    top: 10px;
+    right: 10px;
+  }
+
+  .sites, .link1, .link2 {
+    display: block;
+    width: 90%;
+    margin: 10px auto;
+    text-align: center;
+  }
+
+  #search-input, #manualSearchInput {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  iframe { height: 400px; }
 }
-.link2:hover {
-  background-color: #7fa77b;
-}
-.link:hover {
-  background-color: #7fa77b;
-}
-.sites {
-  padding: 11px 12px;
-  font-weight: bold;
-}
-.sites:hover {
-            background-color: #c82333; 
-        }
+
   </style>
 </head>
 <body onload="checkAccess()">
