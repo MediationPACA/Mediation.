@@ -17,6 +17,9 @@
         return undefined; // Évite le pop-up de confirmation
     };
 
+    window.onload = function() {
+        window.scrollTo(0, 0); 
+    };
 </script>
   <script>
     try {
@@ -89,7 +92,7 @@ body {
 /* ========== Carte Google Maps ========== */
 #map {
   width: 100%;
-  height: 60vh; /* hauteur adaptative */
+  height: 600px; /* hauteur adaptative */
   margin: 15px 0;
 }
 
@@ -145,7 +148,7 @@ button { padding: 6px 12px; font-size: 14px; margin: 5px 3px; }
 
   </style>
 </head>
-<body>
+<body onload="checkAccess()">
   <div class="header">
     <h1>Urgence 2025</h1>
     <p>
