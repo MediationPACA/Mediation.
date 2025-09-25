@@ -17,9 +17,7 @@
         return undefined; // Évite le pop-up de confirmation
     };
 
-    window.onload = function() {
-        window.scrollTo(0, 0); 
-    };
+ 
 </script>
   <script>
     try {
@@ -89,15 +87,13 @@ body {
 .link1:hover, .link2:hover, .sites:hover { background-color: #7fa77b; }
 .sites:hover { background-color: #c82333; }
 
-/* ========== Carte Google Maps ========== */
 #map {
   width: 100%;
-  height: 600px; /* hauteur adaptative */
+  height: 600px; 
   margin: 15px 0;
 }
 
 
-/* ========== Recherche et légende ========== */
 #search-container { margin: 15px 0; }
 #search-input, #manualSearchInput {
   padding: 8px;
@@ -109,7 +105,6 @@ button { padding: 6px 12px; font-size: 14px; margin: 5px 3px; }
 .highlight { background-color: yellow; }
 #legend { margin-top: 10px; }
 
-/* ========== Debug section ========== */
 #debug-info { 
   margin-top: 10px; 
   white-space: pre-wrap; 
