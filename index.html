@@ -286,7 +286,7 @@ button { padding: 6px 12px; font-size: 14px; margin: 5px 3px; }
           seil: row[0]?.trim() || '',
           Esp: row[14]?.trim() || '',
           info: (row[12]?.trim() ? row[12].trim() : row[3]?.trim()) || '',
-          Emoj: row[15]?.trim() || '',
+          Emoj: row[6]?.trim() || '',
           Emoj2: row[11]?.trim() || '',
           jourdispo: row[15]?.trim() ||''
         };
@@ -610,7 +610,7 @@ if (csvUrl === csvURL1 && status.trim().toLowerCase() === "intervention") {
                     markers.push(marker);
                     let debugLine = "";
                     if (csvUrl === csvURL1) {
-                      debugLine = `${repondu} ---> ${espece} | Conseil : ${name} | Numéro : ${Numero} | lieu découverte : ${cityName} | adresse : ${address} | appel : ${seil}`;
+                      debugLine = `${repondu} ---> ${espece} | Conseil : ${name} | Info : ${Emoj} | Numéro : ${Numero} | lieu découverte : ${cityName} | adresse : ${address} | appel : ${seil}`;
                     } else if (csvUrl === csvURL2) {
                       debugLine = `${name} --- ${cityName} NUMERO ${Numero} ${poste} ${espece}`;
                     } else {
