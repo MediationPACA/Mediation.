@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Connexion</title>
+    <script src="auth2.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="TOTEM1.png" type="image/png">
+    <script>
+        // "Entrée"
+        function handleKeyPress(event) {
+            if (event.key === "Enter") { 
+                verifier(); 
+            }
+        }
+
+       
+        window.onload = function() {
+            document.getElementById("password").addEventListener("keydown", handleKeyPress);
+        };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <img src="TOTEM1.png" alt="Logo de l'association" class="logo">
+        <h2>Connexion</h2>
+        <input type="password" id="password" placeholder="Entrez le mot de passe">
+        <button onclick="verifier()">Valider</button>
+        <p class="link"><a href="https://www.asso-totem.com/" target="_blank">Visiter le site de l'association</a></p>
+        <p class="text"><b>0483650279</b></p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="TOTEM1.png">
+  <title>Urgence 2025</title>
+ 
+  <style>
+    body.noscroll {
+        overflow: hidden; 
+    }
+</style>
+  <script src="auth2.js"></script>
+  <script>
+    window.onbeforeunload = function() {
+        return undefined; // Évite le pop-up de confirmation
+    };
+
+ 
+</script>
+  <script>
+    try {
+      checkAccess();
+    } catch (error) {
+      console.error("Erreur lors de la vérification d'accès :", error);
+    }
+  </script>
+
+</head>
+<body>   
+   <button class="mappage" onclick="window.location.href='index.html'">Médiation</button>
+   <button class="mappage" onclick="window.location.href='sub1.html'">Diffusion</button>
+   <button class="mappage" onclick="window.location.href='DOCdiff.html'"> DOC Diffusion</button>
+<iframe src="https://script.google.com/macros/s/AKfycbwJbEVIfFaAq8bKQ4dhNSO80OVtt0RLzJHzZphauThzSpxmWUyX1qxV78SnxvoXuyXK7Q/exec" width="900" height="800"></iframe>
+
+  <iframe src="https://script.google.com/macros/s/AKfycbwdUAB0hqJAZGnn95rB830aqnK7q9dgSLAhPNUnSmPFxqXJ1sFraUD0vJ3y_ASy8e4P2A/exec" width="900" height="800"></iframe>
+</body>
+</html>
