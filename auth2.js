@@ -2,7 +2,7 @@
   var _0x3b2a = [
     'getElementById','value','btoa','setItem','auth',
     'location','href','Gest.html','alert','Mot\x20de\x20passe\x20incorrect\x20!',
-    'getItem','login.html','removeItem'
+    'getItem','login2.html','removeItem'
   ];
   function _0x1f7b(_0x2a4d,_0x4f69){
     return _0x3b2a[_0x2a4d];
