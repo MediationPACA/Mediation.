@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Connexion</title>
+    <script src="auth3.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="TOTEM1.png" type="image/png">
+    <script>
+        // "Entrée"
+        function handleKeyPress(event) {
+            if (event.key === "Enter") { 
+                verifier(); 
+            }
+        }
+
+       
+        window.onload = function() {
+            document.getElementById("password").addEventListener("keydown", handleKeyPress);
+        };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <img src="TOTEM1.png" alt="Logo de l'association" class="logo">
+        <h2>Connexion Gestion</h2>
+        <input type="password" id="password" placeholder="Entrez le mot de passe">
+        <button onclick="verifier()">Valider</button>
+       
+    </div>
+</body>
+</html>
