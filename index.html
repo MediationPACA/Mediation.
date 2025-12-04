@@ -280,13 +280,13 @@ button {
 /* Hérisson */
 .hedgehog {
   position: fixed;
-  width: 70px;
-  height: 70px;
+  width: 30px;
+  height: 30px;
   display: none;
   pointer-events: none;
-  transform: translate(-50%, -50%);
   z-index: 100;
 }
+
 
 /* Bulle */
 .speech-bubble {
@@ -391,8 +391,7 @@ button {
 
 
   <script>
-   
-const leafPile = document.getElementById("leafPile");
+   const leafPile = document.getElementById("leafPile");
 const hedgehog = document.getElementById("hedgehog");
 const bubble = document.getElementById("bubble");
 
@@ -400,7 +399,10 @@ let isActive = false;
 let bubbleTimer = null;
 let autoReturnTimer = null;
 
-// Fonction pour faire rentrer le hérisson
+// Détection mobile
+const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+// Fonction retour hérisson
 function hideHedgehog() {
   isActive = false;
   hedgehog.style.display = "none";
@@ -409,9 +411,8 @@ function hideHedgehog() {
   clearTimeout(autoReturnTimer);
 }
 
-// Clic sur le tas de feuilles
+// Clic tas de feuilles
 leafPile.addEventListener("click", () => {
-  // Animation
   leafPile.classList.add("animate");
   setTimeout(() => leafPile.classList.remove("animate"), 400);
 
@@ -419,37 +420,36 @@ leafPile.addEventListener("click", () => {
     isActive = true;
 
     const rect = leafPile.getBoundingClientRect();
-    hedgehog.style.left = rect.left + 50 + "px";
-    hedgehog.style.top = rect.top + 50 + "px";
+    hedgehog.style.left = rect.left + rect.width / 2 + "px";
+    hedgehog.style.top = rect.top + rect.height / 2 + "px";
     hedgehog.style.display = "block";
 
-    // Après 10 secondes -> bulle
+    // Après 10 s → bulle
     bubbleTimer = setTimeout(() => {
       if (isActive) bubble.style.display = "block";
     }, 10000);
 
-    // Après 15 secondes -> il rentre tout seul
-    autoReturnTimer = setTimeout(() => {
-      hideHedgehog();
-    }, 15000);
+    // 15 s → rentre tout seul
+    autoReturnTimer = setTimeout(hideHedgehog, 15000);
 
   } else {
-    // Si on reclique : il rentre
     hideHedgehog();
   }
 });
 
-// Suivi souris
-document.addEventListener("mousemove", e => {
-  if (isActive) {
-    hedgehog.style.left = e.clientX + "px";
-    hedgehog.style.top = e.clientY + "px";
+// Souris uniquement sur PC
+if (!isMobile) {
+  document.addEventListener("mousemove", e => {
+    if (isActive) {
+      hedgehog.style.left = e.clientX + "px";
+      hedgehog.style.top = e.clientY + "px";
 
-    // Position de bulle
-    bubble.style.left = (e.clientX + 60) + "px";
-    bubble.style.top = (e.clientY - 10) + "px";
-  }
-});
+      bubble.style.left = e.clientX + 40 + "px";
+      bubble.style.top = e.clientY - 10 + "px";
+    }
+  });
+}
+
 
 
     let map;
