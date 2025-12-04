@@ -8,7 +8,7 @@ function verifier() {
         const passwordInput = document.getElementById("password").value;
         if (window.btoa(passwordInput) === PASSWORD_BASE64) {
             // Stocke l'authentification dans localStorage
-            localStorage.setItem("auth", PASSWORD_BASE64);
+            localStorage.setItem("auth3", PASSWORD_BASE64);
             // Redirige vers la page protégée
             window.location.href = "index3.html";
         } else {
@@ -22,7 +22,7 @@ function verifier() {
 // Fonction pour vérifier l'accès à une page protégée
 function checkAccess() {
     try {
-        if (localStorage.getItem("auth") !== PASSWORD_BASE64) {
+        if (localStorage.getItem("auth3") !== PASSWORD_BASE64) {
             // Redirige vers le login si l'utilisateur n'est pas authentifié
             window.location.href = "login3.html";
         }
@@ -34,7 +34,7 @@ function checkAccess() {
 // Fonction pour se déconnecter
 function deconnexion() {
     try {
-        localStorage.removeItem("auth");
+        localStorage.removeItem("auth3");
         window.location.href = "login3.html";
     } catch (e) {
         window.location.href = "login3.html";
