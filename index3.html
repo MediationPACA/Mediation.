@@ -157,7 +157,10 @@ button { padding: 6px 12px; font-size: 14px; margin: 5px 3px; }
     <p class="phone">0483650279</p>
     <button class="logout-button" onclick="deconnexion()">Déconnexion</button>
   </div>
-  <p class="page">CARTE NTERVENTION</p>
+  <p class="page">CARTE NTERVENTION 
+    Cette carte à pour but d'indiquer les emplacement d'animaux sans solution de rapatriment.
+
+  </p>
   <div>
   <div id="map"></div>
 
@@ -462,7 +465,7 @@ button { padding: 6px 12px; font-size: 14px; margin: 5px 3px; }
                 }
                 
                 if ((csvUrl === csvURL2 && urgentMode) || 
-    (csvUrl === csvURL1 && (status === "En cours" || status === "Intervention")) || 
+    (csvUrl === csvURL1 && ( status === "Intervention")) || 
     status === "Disponible") {
                   let markerColor;
                   let icon;

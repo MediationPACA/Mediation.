@@ -1,50 +1,47 @@
-(function(){
-  var _0x3b2a = [
-    'getElementById','value','btoa','setItem','auth',
-    'location','href','Index3.html','alert','Mot\x20de\x20passe\x20incorrect\x20!',
-    'getItem','login3.html','removeItem'
-  ];
-  function _0x1f7b(_0x2a4d,_0x4f69){
-    return _0x3b2a[_0x2a4d];
-  }
+// auth3.js
 
-  var _0x5e6c = 'UmFwYXRyaWV1cnM4Mw==';
+const PASSWORD_BASE64 = "UmFwYXRyaWV1cnM4Mw==";
 
-  function _0x4c9a(){
+// Fonction pour vérifier le mot de passe lors du login
+function verifier() {
     try {
-      var _0x7a = document[_0x1f7b(0)]('password')[_0x1f7b(1)];
-      if (window[_0x1f7b(2)](_0x7a) === _0x5e6c) {
-        localStorage[_0x1f7b(3)](_0x1f7b(4), _0x5e6c);
-        window[_0x1f7b(5)][_0x1f7b(6)] = _0x1f7b(7);
-      } else {
-        window[_0x1f7b(8)](_0x1f7b(9));
-      }
+        const passwordInput = document.getElementById("password").value;
+        if (window.btoa(passwordInput) === PASSWORD_BASE64) {
+            // Stocke l'authentification dans localStorage
+            localStorage.setItem("auth", PASSWORD_BASE64);
+            // Redirige vers la page protégée
+            window.location.href = "Index3.html";
+        } else {
+            alert("Mot de passe incorrect !");
+        }
     } catch (e) {
-      // fail silently
+        console.error("Erreur lors de la vérification du mot de passe", e);
     }
-  }
+}
 
-  function _0x2d8f(){
+// Fonction pour vérifier l'accès à une page protégée
+function checkAccess() {
     try {
-      if (localStorage[_0x1f7b(10)](_0x1f7b(4)) !== _0x5e6c) {
-        window[_0x1f7b(5)][_0x1f7b(6)] = _0x1f7b(11);
-      }
+        if (localStorage.getItem("auth") !== PASSWORD_BASE64) {
+            // Redirige vers le login si l'utilisateur n'est pas authentifié
+            window.location.href = "login3.html";
+        }
     } catch (e) {
-      window[_0x1f7b(5)][_0x1f7b(6)] = _0x1f7b(11);
+        window.location.href = "login3.html";
     }
-  }
+}
 
-  function _0x6b2e(){
+// Fonction pour se déconnecter
+function deconnexion() {
     try {
-      localStorage[_0x1f7b(12)](_0x1f7b(4));
-      window[_0x1f7b(5)][_0x1f7b(6)] = _0x1f7b(11);
+        localStorage.removeItem("auth");
+        window.location.href = "login3.html";
     } catch (e) {
-      window[_0x1f7b(5)][_0x1f7b(6)] = _0x1f7b(11);
+        window.location.href = "login3.html";
     }
-  }
+}
 
-  // Exporter sous les noms d'origine pour compatibilité HTML
-  window.verifier = _0x4c9a;
-  window.checkAccess = _0x2d8f;
-  window.deconnexion = _0x6b2e;
-})();
+// Export pour compatibilité HTML
+window.verifier = verifier;
+window.checkAccess = checkAccess;
+window.deconnexion = deconnexion;
