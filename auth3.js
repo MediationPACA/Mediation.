@@ -10,7 +10,7 @@ function verifier() {
             // Stocke l'authentification dans localStorage
             localStorage.setItem("auth", PASSWORD_BASE64);
             // Redirige vers la page protégée
-            window.location.href = "Index3.html";
+            window.location.href = "index3.html";
         } else {
             alert("Mot de passe incorrect !");
         }
