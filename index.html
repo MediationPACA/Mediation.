@@ -422,10 +422,10 @@ leafPile.addEventListener("click", () => {
   if (!isActive) {
     isActive = true;
 
-    const rect = leafPile.getBoundingClientRect();
-    hedgehog.style.left = (rect.left + rect.width / 2 - hedgehogWidth / 2) + "px";
-hedgehog.style.top = (rect.top + rect.height / 20 - hedgehogHeight / 20)  + "px";
-    hedgehog.style.display = "none";
+      const rect = leafPile.getBoundingClientRect();
+    hedgehog.style.left = rect.left + rect.width / 2 + "px";
+    hedgehog.style.top = rect.top + rect.height / 2 + "px";
+    hedgehog.style.display = "block";
 
     // Après 10 s → bulle
     bubbleTimer = setTimeout(() => {
@@ -439,8 +439,8 @@ hedgehog.style.top = (rect.top + rect.height / 20 - hedgehogHeight / 20)  + "px"
     hideHedgehog();
   }
 });
-const hedgehogWidth = 0;
-const hedgehogHeight = 0;
+const hedgehogWidth = 30;
+const hedgehogHeight = 30;
 // Souris uniquement sur PC
 if (!isMobile) {
   document.addEventListener("mousemove", e => {
