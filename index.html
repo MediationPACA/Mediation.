@@ -248,6 +248,65 @@ button {
     font-size: 12px;
   }
 }
+/* Tas de feuilles */
+.leaf-pile {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+  z-index: 20;
+}
+
+.leaf-pile .pile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Animation tremblement */
+.leaf-pile.animate {
+  animation: pileShake 0.4s ease-in-out;
+}
+
+@keyframes pileShake {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+  75% { transform: rotate(-3deg); }
+}
+
+/* Hérisson */
+.hedgehog {
+  position: fixed;
+  width: 70px;
+  height: 70px;
+  display: none;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+}
+
+/* Bulle */
+.speech-bubble {
+  position: fixed;
+  background: white;
+  border: 2px solid #555;
+  border-radius: 10px;
+  padding: 6px 12px;
+  font-size: 14px;
+  white-space: nowrap;
+  display: none;
+  z-index: 200;
+  animation: bubblePop 0.3s ease-out;
+}
+
+@keyframes bubblePop {
+  0% { transform: scale(0.2); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
 
   </style>
 </head>
@@ -320,8 +379,80 @@ button {
   <iframe src="https://docs.google.com/spreadsheets/d/1WJ5bBVULuvcCbTtekb4jAbY58cHOA0YmbLiuPDiQZ64/edit" width="90%" height="1000"></iframe>
 
  
-  
+<div class="leaf-pile" id="leafPile">
+  <img src="R.png" class="pile-img">
+</div>
+
+<div class="hedgehog" id="hedgehog">
+  <img src="Her.png">
+</div>
+
+<div class="speech-bubble" id="bubble">Je ne sers à rien tout seul !</div>
+
+<div class="speech-bubble" id="bubble">Je ne sers à rien tout seul !</div>
+
   <script>
+   
+const leafPile = document.getElementById("leafPile");
+const hedgehog = document.getElementById("hedgehog");
+const bubble = document.getElementById("bubble");
+
+let isActive = false;
+let bubbleTimer = null;
+let autoReturnTimer = null;
+
+// Fonction pour faire rentrer le hérisson
+function hideHedgehog() {
+  isActive = false;
+  hedgehog.style.display = "none";
+  bubble.style.display = "none";
+  clearTimeout(bubbleTimer);
+  clearTimeout(autoReturnTimer);
+}
+
+// Clic sur le tas de feuilles
+leafPile.addEventListener("click", () => {
+  // Animation
+  leafPile.classList.add("animate");
+  setTimeout(() => leafPile.classList.remove("animate"), 400);
+
+  if (!isActive) {
+    isActive = true;
+
+    const rect = leafPile.getBoundingClientRect();
+    hedgehog.style.left = rect.left + 50 + "px";
+    hedgehog.style.top = rect.top + 50 + "px";
+    hedgehog.style.display = "block";
+
+    // Après 10 secondes -> bulle
+    bubbleTimer = setTimeout(() => {
+      if (isActive) bubble.style.display = "block";
+    }, 10000);
+
+    // Après 15 secondes -> il rentre tout seul
+    autoReturnTimer = setTimeout(() => {
+      hideHedgehog();
+    }, 15000);
+
+  } else {
+    // Si on reclique : il rentre
+    hideHedgehog();
+  }
+});
+
+// Suivi souris
+document.addEventListener("mousemove", e => {
+  if (isActive) {
+    hedgehog.style.left = e.clientX + "px";
+    hedgehog.style.top = e.clientY + "px";
+
+    // Position de bulle
+    bubble.style.left = (e.clientX + 60) + "px";
+    bubble.style.top = (e.clientY - 10) + "px";
+  }
+});
+
+
     let map;
     let markers = [];
     const GEOCODING_CACHE_KEY = 'geocodingCache';
