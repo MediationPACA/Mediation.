@@ -272,7 +272,7 @@ button {
 
 /* Animation tremblement */
 .leaf-pile.animate {
-  animation: pileShake 0.8s ease-in-out;
+  animation: pileShake 0.5s ease-in-out;
 }
 
 @keyframes pileShake {
@@ -281,17 +281,13 @@ button {
   50% { transform: rotate(3deg); }
   75% { transform: rotate(-3deg); }
 }
-
 .hedgehog {
   position: fixed;
-  width: 2px;
-  height: 2px;
+  width: 50px; /* taille par défaut PC */
+  height: 50px;
   display: none;
   pointer-events: none;
-    transform: translate(-500%, -500%);
-
   z-index: 9999;
-  transform: none !important; /* empêche tout offset caché */
 }
 
 
@@ -306,7 +302,7 @@ button {
   white-space: nowrap;
   display: none;
   z-index: 10000;
-  animation: bubblePop 0.3s ease-out;
+  animation: bubblePop 0.4s ease-out;
 }
 
 @keyframes bubblePop {
@@ -428,8 +424,8 @@ leafPile.addEventListener("click", () => {
 
     const rect = leafPile.getBoundingClientRect();
     hedgehog.style.left = (rect.left + rect.width / 2 - hedgehogWidth / 2) + "px";
-hedgehog.style.top = (rect.top + rect.height / 2 - hedgehogHeight / 2)  + "px";
-    hedgehog.style.display = "block";
+hedgehog.style.top = (rect.top + rect.height / 20 - hedgehogHeight / 20)  + "px";
+    hedgehog.style.display = "none";
 
     // Après 10 s → bulle
     bubbleTimer = setTimeout(() => {
@@ -443,8 +439,8 @@ hedgehog.style.top = (rect.top + rect.height / 2 - hedgehogHeight / 2)  + "px";
     hideHedgehog();
   }
 });
-const hedgehogWidth = 3;
-const hedgehogHeight = 3;
+const hedgehogWidth = 0;
+const hedgehogHeight = 0;
 // Souris uniquement sur PC
 if (!isMobile) {
   document.addEventListener("mousemove", e => {
