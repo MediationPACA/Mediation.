@@ -33,8 +33,19 @@
     input, textarea, select {
   font-size: 16px !important;
 }
- /* ========== Reset de base ========== */
-* { margin: 0; padding: 0; box-sizing: border-box; }
+/* ========== Reset de base ========== */
+* { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+}
+
+/* ========== Inputs - Corriger zoom sur mobile ========== */
+input, textarea, select {
+  font-size: 16px;
+}
+
+/* ========== Body ========== */
 body { 
   font-family: Arial, sans-serif; 
   text-align: center; 
@@ -42,7 +53,8 @@ body {
   background-image: url('marty.png');
   background-repeat: no-repeat;
   background-position: center;
-   background-size: 70%;
+  background-size: 90%;
+  background-attachment: fixed; /* Pour l'effet parallaxe au scroll */
 }
 
 /* ========== Header ========== */
@@ -50,18 +62,32 @@ body {
   position: relative; 
   width: 100%; 
   min-height: 250px; 
-  
   background-size: cover; 
   display: flex; 
-  flex-direction: column; 
   justify-content: center; 
   align-items: center; 
   color: black; 
   padding: 20px; 
 }
-.header h1 { font-size: 30px; font-weight: bold; }
-.header p { font-size: 20px; font-weight: bold; max-width: 600px; margin-top: 1px; }
-.phone { font-size: 28px; font-weight: bold; margin-top: 20px; }
+
+.header h1 { 
+  font-size: 30px; 
+  font-weight: bold; 
+  
+}
+
+.header p { 
+  font-size: 20px; 
+  font-weight: bold; 
+  max-width: 600px; 
+  margin-top: 10px; 
+}
+
+.phone { 
+  font-size: 28px; 
+  font-weight: bold; 
+  margin-top: 20px; 
+}
 
 /* ========== Boutons et liens ========== */
 .logout-button {
@@ -75,8 +101,12 @@ body {
   padding: 14px 30px;
   cursor: pointer;
   z-index: 10;
+  transition: background-color 0.3s ease;
 }
-.logout-button:hover { background-color: #c82333; }
+
+.logout-button:hover { 
+  background-color: #c82333; 
+}
 
 .link1, .link2, .sites {
   display: inline-block;
@@ -86,57 +116,88 @@ body {
   border-radius: 5px;
   margin: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
-.link1 { padding: 6px 12px; }
-.link2 { padding: 10px 20px; }
-.sites { padding: 11px 12px; font-weight: bold; }
 
-.link1:hover, .link2:hover, .sites:hover { background-color: #7fa77b; }
-.sites:hover { background-color: #c82333; }
+.link1 { 
+  padding: 6px 12px; 
+}
 
+.link2 { 
+  padding: 10px 20px; 
+}
+
+.sites { 
+  padding: 11px 12px; 
+  font-weight: bold; 
+}
+
+.link1:hover, .link2:hover { 
+  background-color: #7fa77b; 
+}
+
+.sites:hover { 
+  background-color: #c82333; 
+}
+
+/* ========== Map et recherche ========== */
 #map {
   width: 100%;
   height: 600px; 
   margin: 15px 0;
 }
 
+#search-container { 
+  margin: 15px 0; 
+}
 
-#search-container { margin: 15px 0; }
 #search-input, #manualSearchInput {
   padding: 8px;
   width: 250px;
   font-size: 14px;
   max-width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
-button { padding: 6px 12px; font-size: 14px; margin: 5px 3px; }
-.highlight { background-color: yellow; }
-#legend { margin-top: 10px; }
+
+button { 
+  padding: 6px 12px; 
+  font-size: 14px; 
+  margin: 5px 3px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.highlight { 
+  background-color: yellow; 
+}
+
+#legend { 
+  margin-top: 10px; 
+}
 
 #debug-info { 
   margin-top: 10px; 
   white-space: pre-wrap; 
-  font-family: Arial, sans-serif; 
+  font-family: 'Barlow', Bold; 
   font-size: 14px; 
   text-align: left; 
   padding: 10px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 4px;
 }
 
 /* ========== Responsive Mobile ========== */
-/* ===========================
-   RESPONSIVE MOBILE AMÉLIORÉ
-   =========================== */
-
 @media (max-width: 768px) {
-
   body {
     overflow-x: hidden;
     width: 100%;
   }
 
-  /* Header plus compact */
   .header {
     min-height: 180px;
-    background-size: contain;
     padding: 10px;
   }
 
@@ -152,14 +213,13 @@ button { padding: 6px 12px; font-size: 14px; margin: 5px 3px; }
     font-size: 18px;
   }
 
-  /* Bouton logout repositionné */
   .logout-button {
     padding: 8px 14px;
     right: 5px;
     top: 5px;
+    font-size: 12px;
   }
 
-  /* Boutons en pleine largeur */
   .sites, .link1, .link2 {
     display: block;
     width: 95%;
@@ -167,28 +227,23 @@ button { padding: 6px 12px; font-size: 14px; margin: 5px 3px; }
     font-size: 16px;
   }
 
-  /* Carte responsive */
   #map {
-    height: 350px !important;
-    width: 100% !important;
+    height: 350px;
+    width: 100%;
   }
 
-  /* Champs recherche */
-  #search-input,
-  #manualSearchInput {
-    width: 95% !important;
+  #search-input, #manualSearchInput {
+    width: 95%;
     font-size: 16px;
   }
 
-  /* Iframes complètement responsive */
   iframe {
-    width: 95% !important;
+    width: 95%;
     max-width: 100%;
-    height: 600px !important;
+    height: 600px;
     margin: 25px auto;
   }
 
-  /* Section debug */
   #debug-info {
     font-size: 12px;
   }
@@ -198,7 +253,7 @@ button { padding: 6px 12px; font-size: 14px; margin: 5px 3px; }
 </head>
 <body >
   <div class="header">
-    <h1>Urgence 2025</h1>
+    <h1>Urgence 2025
     <p>
       Malgré la neige, et le vent … et la pluie, Malgré les rafales et les intempéries,<br>
       Et la grêle, et les tourbillons, Par-dessus les plaines et les monts,<br>
@@ -207,7 +262,7 @@ button { padding: 6px 12px; font-size: 14px; margin: 5px 3px; }
       Rien ne saurait l’arrêter !<br><br>
       <strong>DUMBO</strong>
     </p>
-    <p class="phone">0483650279</p>
+    <p class="phone">0483650279</p></h1>
     <button class="logout-button" onclick="deconnexion()">Déconnexion</button>
   </div>
   <p class="page">Médiation</p>
