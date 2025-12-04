@@ -277,14 +277,14 @@ button {
   75% { transform: rotate(-3deg); }
 }
 
-/* Hérisson */
 .hedgehog {
   position: fixed;
-  width: 30px;
-  height: 30px;
+  width: 2%;
+  height: 2%;
   display: none;
   pointer-events: none;
-  z-index: 100;
+  z-index: 10;
+  transform: none !important; /* empêche tout offset caché */
 }
 
 
@@ -441,8 +441,8 @@ leafPile.addEventListener("click", () => {
 if (!isMobile) {
   document.addEventListener("mousemove", e => {
     if (isActive) {
-      hedgehog.style.left = e.clientX + "px";
-      hedgehog.style.top = e.clientY + "px";
+     hedgehog.style.left = (e.clientX - 500) + "px";
+    hedgehog.style.top = (e.clientY - 500) + "px";
 
       bubble.style.left = e.clientX + 40 + "px";
       bubble.style.top = e.clientY - 10 + "px";
