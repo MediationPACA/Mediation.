@@ -427,8 +427,8 @@ leafPile.addEventListener("click", () => {
     isActive = true;
 
     const rect = leafPile.getBoundingClientRect();
-    hedgehog.style.left = rect.left + rect.width / 2 + "px";
-    hedgehog.style.top = rect.top + rect.height / 2 + "px";
+    hedgehog.style.left = (rect.left + rect.width / 2 - hedgehogWidth / 2) + "px";
+hedgehog.style.top = (rect.top + rect.height / 2 - hedgehogHeight / 2)  + "px";
     hedgehog.style.display = "block";
 
     // Après 10 s → bulle
@@ -443,7 +443,8 @@ leafPile.addEventListener("click", () => {
     hideHedgehog();
   }
 });
-
+const hedgehogWidth = 3;
+const hedgehogHeight = 3;
 // Souris uniquement sur PC
 if (!isMobile) {
   document.addEventListener("mousemove", e => {
