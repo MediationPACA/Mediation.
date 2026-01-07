@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="TOTEM1.png">
-  <title>Urgence 2025</title>
+  <title>Médiation TOTEM</title>
  
   <style>
     body.noscroll {
@@ -312,13 +312,40 @@ button {
   0% { transform: scale(0.2); opacity: 0; }
   100% { transform: scale(1); opacity: 1; }
 }
+details {
+    background: #89c095;
+    margin-bottom: 10px;
+    padding: 22px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
 
+summary {
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+    list-style: none; /* Cache la petite flèche par défaut selon le navigateur */
+}
+
+summary::before {
+    content: "📁 "; /* Ajoute une icône devant */
+}
+
+details[open] summary::before {
+    content: "📂 "; /* Change l'icône quand c'est ouvert */
+}
+
+iframe {
+    margin-top: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
 
   </style>
 </head>
 <body >
   <div class="header">
-    <h1>Urgence 2025
+    <h1>
     <p>
       Malgré la neige, et le vent … et la pluie, Malgré les rafales et les intempéries,<br>
       Et la grêle, et les tourbillons, Par-dessus les plaines et les monts,<br>
@@ -331,13 +358,10 @@ button {
     <button class="logout-button" onclick="deconnexion()">Déconnexion</button>
   </div>
   <p class="page">Médiation</p>
-  <div> <button class= "sites" onclick="window.location.href='sub1.html'"> Gestion Diffusion </button>
+
     <button class= "sites" onclick="window.location.href='sites.html'"> Sites Utiles </button>
-    <button class= "sites" onclick="window.location.href='DOC.html'"> Doc Véto/bénévoles </button>
-    <button class= "sites" onclick="window.location.href='login2.html'"> Gestion </button>
-
-        <button class= "sites" onclick="window.location.href='STAT.html'"> STAT </button>
-
+    <button class= "sites" onclick="window.location.href='DOC.html'"> Doc/Gesion </button>
+  
 
 
   <div id="map"></div>
@@ -352,39 +376,50 @@ button {
 <button id="manualSearchButton">Rechercher</button>
 
     <button id="switchMapButtonUrgence">Carte Urgence (Ajouter/Enlever tous les bénévoles)</button>
-  </br><a class="link1" href="https://www.ornitho.com/" target="_blank">Identification oiseau IA</a>
+  </br><details>
+    <summary>Fiche appel</summary><a class="link1" href="https://www.ornitho.com/" target="_blank">Identification oiseau IA</a>
     <a class="link1" href="https://www.oiseaux.net/identifier/accueil.html" target="_blank">Aide identification</a>
     <a class="link1" href="https://www.oisillon.net/apprendre-reconnaitre-oiseaux-de-jardin" target="_blank">Aide identification 2</a>
     <div id="legend">
       </br> <strong>Légende :</strong>
       <ul id="legend-list"></ul>
-    </div>
+    </details></div>
     <div id="error-message"></div>
     <div id="debug-container">
       <button id="toggle-debug">
         <span id="arrow">▶</span> Afficher liste infos 
       </button>
       <div id="debug-info" style="display: none;"></div><br>
-    <a class="link2" href="https://docs.google.com/forms/d/e/1FAIpQLSdYmy3eCjHTysUDNlxZLb3flDGO8rR5OBlYthfuRYx3zOSZNA/viewform?embedded=true"  target="_blank">Ancien formulaire</a>
-   <a class="link2" href="https://docs.google.com/spreadsheets/d/1SjBmjncMrk6WSFh-0KUzp8Rr55EZqYpcsL2PetWwskU/edit?gid=0#gid=0" target="_blank">Bénévoles</a></p>
-
-  <a class="link2" href="https://docs.google.com/spreadsheets/d/1PSjpRvCEZI1pqhebKzsGvdVUrOHlzc1d/edit?gid=1056850233#gid=1056850233" target="_blank">Véto83</a>
+    
 <a class="link2" href="https://docs.google.com/forms/d/e/1FAIpQLSeLKk31R_KhfPtpXiN5lpbqqdolshKWBhjVHiJcC39eHmlOcQ/viewform?usp=sharing&ouid=107741103362312579900" target="_blank">Envoyer une photo</a>
 <a class="link2" href="https://drive.google.com/file/d/1O53vgIu8fT0flb4bh12cCP7a_gxP2fxq/preview" target="_blank">Guide Médiation</a>
 <a class="link2" href="https://docs.google.com/document/d/1rtHrRyi4FYOWsCzVXqs7j0Zb_JFObA4NflO_UyifUnw/edit?" target="_blank">Notes internes</a>
 
   </div>
 
-    <iframe src="https://script.google.com/macros/s/AKfycby2dUhbGPcTj2I6g_Z3iDDO6YqQKw9f3PdClDexj-bev8ltJzWSGcm5d1OtArkqNXe1/exec" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Chargement…</iframe>
-    <iframe src="https://script.google.com/macros/s/AKfycbwNyIlO5-VWMqg5rAyVUYVSybierbvtwSJ9RufToM6miAb19Nsao9NKhTr-U4kgpLpF7A/exec" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">FO</iframe>
-    <iframe src="https://script.google.com/macros/s/AKfycbz538a6E6C4pUOltHxkv7XOOLQYSXxegsVZCcK7j7GmBrMOarSktv7ynrIi5IBSjQz4/exec" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">FO</iframe>
+<hr>
 
+<details>
+    <summary>Fiche appel</summary>
+    <iframe src="https://script.google.com/macros/s/AKfycby2dUhbGPcTj2I6g_Z3iDDO6YqQKw9f3PdClDexj-bev8ltJzWSGcm5d1OtArkqNXe1/exec"  width="640" height="800" frameborder="0" marginheight="0" marginwidth="0"></iframe>
+</details>
+
+<details>
+    <summary>Vétérinaires</summary>
+    <iframe src="https://script.google.com/macros/s/AKfycbwNyIlO5-VWMqg5rAyVUYVSybierbvtwSJ9RufToM6miAb19Nsao9NKhTr-U4kgpLpF7A/exec"  width="640" height="800" frameborder="0" marginheight="0" marginwidth="0"></iframe>
+</details>
+
+<details>
+    <summary>Bénévoles</summary>
+    <iframe src="https://script.google.com/macros/s/AKfycbz538a6E6C4pUOltHxkv7XOOLQYSXxegsVZCcK7j7GmBrMOarSktv7ynrIi5IBSjQz4/exec"  width="640" height="800" frameborder="0" marginheight="0" marginwidth="0"></iframe>
+</details>
   
   <p class="link"><a href="https://docs.google.com/spreadsheets/d/1WJ5bBVULuvcCbTtekb4jAbY58cHOA0YmbLiuPDiQZ64/edit?resourcekey=&gid=527237974#gid=527237974" target="_blank">Médiation</a></p>
 
-  
+  <details>
+    <summary>📑 Tableau de suivi Médiation (Google Sheets)</summary>
   <iframe src="https://docs.google.com/spreadsheets/d/1WJ5bBVULuvcCbTtekb4jAbY58cHOA0YmbLiuPDiQZ64/edit" width="90%" height="1000"></iframe>
-
+</details>
  
 <div class="leaf-pile" id="leafPile">
   <img src="R.png" class="pile-img">
